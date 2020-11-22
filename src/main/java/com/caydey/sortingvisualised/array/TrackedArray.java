@@ -31,7 +31,6 @@ public class TrackedArray extends Array {
 
   private void sleep(int delay) {
     try {
-      System.out.println("thredslep");
       Thread.sleep(delay);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
