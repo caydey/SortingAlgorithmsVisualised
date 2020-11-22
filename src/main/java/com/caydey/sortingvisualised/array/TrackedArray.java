@@ -29,18 +29,19 @@ public class TrackedArray extends Array {
     this.arrayOperations = arrayOperations;
   }
 
+  private void sleep(int delay) {
+    try {
+      System.out.println("thredslep");
+      Thread.sleep(delay);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+  }
 
   // operations
   public void swap(int indexA, int indexB) {
-    // Timer timer = new Timer();
-    // TimerTask action = new TimerTask() {
-    //   @Override
-    //   public void run() {
-    //     operationListener.swapAction(indexA, indexB);
-    //   }
-    // };
-    // timer.schedule(action, ++counter*1000);
-
+    sleep(10);
+    operationListener.swapAction(indexA, indexB);
     // System.out.println(this);
     arrayOperations.incSwaps();
     int tmp = get(indexA);

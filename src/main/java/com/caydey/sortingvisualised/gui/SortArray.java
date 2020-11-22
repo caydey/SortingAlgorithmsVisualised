@@ -14,6 +14,8 @@ public class SortArray implements Runnable {
 
   @Override
   public void run() {
+    // SortingAlgorithm sortingAlgorithm = new InsertionSort();
+    // sortingAlgorithm.sort(array);
     InsertionSort.sort(array);
   }
 }

@@ -26,7 +26,7 @@ public class WindowFrame extends JFrame {
     c.gridx = 1; c.gridy = 0;
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
-    TrackedArray trackedArray = new TrackedArray(32, ArrayOrder.RANDOMIZED);
+    TrackedArray trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
     arrayPanel = new ArrayPanel(trackedArray);
     trackedArray.setOperationListener(new ArrayOperationListener() {
       @Override
@@ -50,8 +50,7 @@ public class WindowFrame extends JFrame {
     add(arrayPanel, c);
 
 
-    // problem: need to make InsertionSort halt its execution everytime it calls TrackedArray.swap
-    // so TrackedArray can call for canvas to be repainted
+    // start sorting in thread so it can sleep and run in parrallel
     Runnable runnable = new SortArray(trackedArray);
     Thread thread = new Thread(runnable);
     thread.start();

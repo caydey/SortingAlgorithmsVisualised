@@ -41,5 +41,4 @@ public class MergeSort implements SortingAlgorithm {
       array.set(k++, right.get(j++));
     }
   }
-
 }
