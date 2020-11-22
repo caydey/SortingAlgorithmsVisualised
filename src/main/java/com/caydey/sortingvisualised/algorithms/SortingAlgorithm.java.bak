@@ -1,0 +1,19 @@
+package com.caydey.sortingvisualised.algorithms;
+
+import com.caydey.sortingvisualised.array.TrackedArray;
+
+// abstract means it has to be overriden
+
+public abstract class SortingAlgorithm implements Runnable {
+  protected TrackedArray array;
+  public void setArray(TrackedArray array) {
+    this.array = array;
+  }
+
+  public abstract void sort();
+
+  @Override
+  public void run() {
+    sort();
+  }
+}
