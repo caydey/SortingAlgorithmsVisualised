@@ -16,7 +16,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     // System.out.println("swap");
   }
   @Override
-  public void comparisionAction(int indexA, int indexB) {
+  public void compareAction(int indexA, int indexB) {
     System.out.print("compare");
   }
   @Override
