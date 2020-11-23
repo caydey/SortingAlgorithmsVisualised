@@ -4,6 +4,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class PancakeSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     int n = array.length;
     for (int curr_size = n; curr_size>1; --curr_size) {

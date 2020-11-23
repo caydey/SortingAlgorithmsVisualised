@@ -3,6 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class QuickSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     quickSort(array, 0, array.length-1);
   }

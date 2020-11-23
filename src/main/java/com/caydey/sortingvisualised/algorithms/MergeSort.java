@@ -3,6 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class MergeSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     mergeSort(array, array.length);
   }

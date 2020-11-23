@@ -5,6 +5,7 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 import java.util.Random;
 
 public class BogoSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     while (!isSorted(array)) {
       shuffle(array);

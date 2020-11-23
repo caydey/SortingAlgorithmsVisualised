@@ -3,6 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class CombSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     int gap = array.length;
 

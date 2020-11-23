@@ -3,6 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class CocktailSort implements SortingAlgorithm {
+  @Override
   public void sort(TrackedArray array) {
     boolean swapped = true;
     int start = 0;
