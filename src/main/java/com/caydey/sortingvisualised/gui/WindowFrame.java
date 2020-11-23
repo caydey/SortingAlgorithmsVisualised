@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-
 import com.caydey.sortingvisualised.array.TrackedArray;
 import com.caydey.sortingvisualised.array.ArrayOrder;
 import com.caydey.sortingvisualised.algorithms.*;
@@ -42,5 +41,4 @@ public class WindowFrame extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
-
 }
