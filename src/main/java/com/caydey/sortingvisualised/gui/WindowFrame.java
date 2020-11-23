@@ -23,6 +23,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   private Runnable sortingRunnable;
   private Thread sortingThread;
 
+  private boolean isSorting;
+
   public WindowFrame() {
     // title
     super("Sorting Algorithms Visualised");
@@ -64,7 +66,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
     sortingThread = new Thread(sortingRunnable);
 
-
+    // true when array is being sorted
+    isSorting = false;
 
 
     // setResizable(false);
@@ -78,16 +81,18 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   public void startAction() {
     // start sorting in thread so it can sleep and run in parrallel
     // without effecting porgram execution
-
-    sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
-    sortingThread = new Thread(sortingRunnable);
-    sortingThread.start();
+    if (!isSorting) { // dont sort array thats already being sorted
+      sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
+      sortingThread = new Thread(sortingRunnable);
+      sortingThread.start();
+      isSorting = true;
+    }
   }
   @Override
   public void resetAction() {
-
     ((SortArray)sortingRunnable).setTerminating(); // tell SortArray that its terminating
     sortingThread.interrupt();  // terminate
+    isSorting = false; // not sorting array
 
     trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
     arrayPanel.setTrackedArray(trackedArray);
