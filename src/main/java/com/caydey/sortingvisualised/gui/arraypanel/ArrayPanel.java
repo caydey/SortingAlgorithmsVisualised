@@ -9,6 +9,7 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private TrackedArray trackedArray;
   private int scale;
+  private int panelSize;
 
   // the index of elements that had an operation done on it
   private int[] lastCompared;
@@ -24,7 +25,9 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private boolean showGets;
   private boolean showSets;
 
-  public ArrayPanel() {
+  public ArrayPanel(int panelSize) {
+    this.panelSize = panelSize;
+    setSize(panelSize, panelSize);
     // set last operations to null
     lastCompared = new int[] {-1,-1};
     lastSwaped = new int[] {-1,-1};
@@ -39,10 +42,13 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {
-    trackedArray.setOperationListener(this);
+    isArraySorted = false; // given new array, assume its not sorted
+    trackedArray.setOperationListener(this);  // so trackedarray can comunicate to this what is being compared with what etc
     this.trackedArray = trackedArray;
 
     scale = 500/(trackedArray.length);
+
+    repaint();
   }
 
   public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
@@ -91,6 +97,10 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
 
   public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D)g;
+
+    if (trackedArray == null) { // if array is not defined
+      return;
+    }
 
     // clean
     g2d.setColor(Color.WHITE);
