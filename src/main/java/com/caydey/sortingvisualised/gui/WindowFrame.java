@@ -26,10 +26,9 @@ public class WindowFrame extends JFrame {
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
     arrayPanel = new ArrayPanel();
-    TrackedArray trackedArray = new TrackedArray(100, ArrayOrder.REVERSED);
-    trackedArray.setOperationListener(arrayPanel);
+    TrackedArray trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
     arrayPanel.setTrackedArray(trackedArray);
-    arrayPanel.setShowSwaps(true);
+    // arrayPanel.setShowSwaps(true);
     // arrayPanel.setShowGets(true);
     // arrayPanel.setShowSets(true);
     // arrayPanel.setShowComparisons(true);

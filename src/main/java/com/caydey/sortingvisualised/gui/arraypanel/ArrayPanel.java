@@ -39,7 +39,9 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {
+    trackedArray.setOperationListener(this);
     this.trackedArray = trackedArray;
+
     scale = 500/(trackedArray.length);
   }
 
