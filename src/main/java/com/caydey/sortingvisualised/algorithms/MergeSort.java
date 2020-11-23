@@ -27,7 +27,7 @@ public class MergeSort implements SortingAlgorithm {
     int i=0, j=0, k=0;
     while (i < leftPos && j < rightPos) {
       // make into trackedArray method left.greaterthanequals(i, right, j)
-      array.incComparisons();
+      array.compare(i, j);
       if (left.get(i) <= right.get(j)) {
         array.set(k++, left.get(i++));
       } else {

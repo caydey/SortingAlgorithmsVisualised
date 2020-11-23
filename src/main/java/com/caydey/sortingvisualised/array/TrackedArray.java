@@ -96,8 +96,8 @@ public class TrackedArray extends Array {
     arrayOperations.incComparisons(); // update operations count
     return (get(a) <= get(b));
   }
-
-  public void incComparisons() {
+  public void compare(int a, int b) { // for logging purposes
+    operationListener.compareAction(a, b); // call to action listener
     arrayOperations.incComparisons(); // update operations count
   }
 
