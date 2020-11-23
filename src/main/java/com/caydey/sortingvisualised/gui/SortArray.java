@@ -18,5 +18,6 @@ public class SortArray implements Runnable {
   @Override
   public void run() {
     algorithm.sort(array);
+    array.sorted();
   }
 }

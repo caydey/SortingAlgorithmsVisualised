@@ -13,6 +13,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private int[] lastCompared = new int[2]; // the 2 elements that were last compared with eachother
   private int[] lastSwaped = new int[2]; // the 2 elements that were last swaped
 
+  private boolean isArraySorted;
 
   @Override
   public void swapAction(int indexA, int indexB) {
@@ -36,6 +37,11 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   public void setAction(int index, int value) {
     System.out.println("set");
   }
+  @Override
+  public void sortedAction() {
+    isArraySorted = true;
+    System.out.println("sorted");
+  }
 
 
   public ArrayPanel(TrackedArray trackedArray) {
@@ -47,17 +53,23 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D)g;
 
+    // clean
     g2d.setColor(Color.WHITE);
     g2d.fillRect(0,0, 500, 500);
 
+    // bars
     g2d.setColor(Color.BLACK);
     int[] array = trackedArray.getArray();
     for (int i=0; i<array.length; i++) {
-      g2d.setColor(Color.BLACK);
-      if (i == lastCompared[0] || i == lastCompared[1]) {
-        g2d.setColor(Color.BLUE);
-      } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
-        g2d.setColor(Color.RED);
+      if (isArraySorted) {
+        g2d.setColor(Color.GREEN);
+      } else {
+        g2d.setColor(Color.BLACK);
+        if (i == lastCompared[0] || i == lastCompared[1]) {
+          g2d.setColor(Color.BLUE);
+        } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
+          g2d.setColor(Color.RED);
+        }
       }
       g2d.fillRect(i*scale,500-((array[i]+1)*scale), scale,((array[i]+1)*scale));
     }
