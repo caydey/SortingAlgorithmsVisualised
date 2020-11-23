@@ -33,7 +33,7 @@ public class WindowFrame extends JFrame {
 
 
     // start sorting in thread so it can sleep and run in parrallel
-    Runnable runnable = new SortArray(trackedArray, new QuickSort());
+    Runnable runnable = new SortArray(trackedArray, new CombSort());
     Thread thread = new Thread(runnable);
     thread.start();
 
