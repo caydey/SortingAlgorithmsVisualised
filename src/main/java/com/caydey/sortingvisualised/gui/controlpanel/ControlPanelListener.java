@@ -8,6 +8,6 @@ public interface ControlPanelListener {
   public void startAction();
   public void resetAction();
   public void setDelayAction(int ms);
-  public void setSortingAlgorithmAction(SortingAlgorithm algorithm);
+  public void setSortingAlgorithmAction(SortingAlgorithm sortingAlgorithm);
   public void setArrayOrder(ArrayOrder order);
 }

@@ -3,7 +3,6 @@ package com.caydey.sortingvisualised.gui;
 
 import com.caydey.sortingvisualised.array.TrackedArray;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
-import com.caydey.sortingvisualised.algorithms.*;
 
 public class SortArray implements Runnable {
   private TrackedArray array;
@@ -27,6 +26,5 @@ public class SortArray implements Runnable {
     if (!isTerminating) { // if sort is terminated dont sent sorted signal to array
       array.sorted();
     }
-
   }
 }
