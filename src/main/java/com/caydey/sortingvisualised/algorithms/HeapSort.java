@@ -3,7 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class HeapSort implements SortingAlgorithm {
-  public static void sort(TrackedArray array) {
+  public void sort(TrackedArray array) {
     int length = array.length;
 
     // Build heap (rearrange array)
@@ -23,7 +23,7 @@ public class HeapSort implements SortingAlgorithm {
 
   // To heapify a subtree rooted with node i which is
   // an index in arr[]. n is size of heap
-  private static void heapify(TrackedArray array, int length, int i) {
+  private void heapify(TrackedArray array, int length, int i) {
     int largest = i; // Initialize largest as root
     int left = (2*i)+1;
     int right = (2*i)+2;

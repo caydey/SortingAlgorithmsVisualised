@@ -3,7 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class CombSort implements SortingAlgorithm {
-  public static void sort(TrackedArray array) {
+  public void sort(TrackedArray array) {
     int gap = array.length;
 
     boolean swapped = true;

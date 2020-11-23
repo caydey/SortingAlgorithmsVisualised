@@ -3,7 +3,7 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class BubbleSort implements SortingAlgorithm {
-  public static void sort(TrackedArray array) {
+  public void sort(TrackedArray array) {
     boolean swapped = true;
     int j=0;
     while (swapped) {

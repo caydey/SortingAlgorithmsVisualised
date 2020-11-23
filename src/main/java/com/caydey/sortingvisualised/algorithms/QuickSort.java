@@ -3,11 +3,11 @@ package com.caydey.sortingvisualised.algorithms;
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class QuickSort implements SortingAlgorithm {
-  public static void sort(TrackedArray array) {
+  public void sort(TrackedArray array) {
     quickSort(array, 0, array.length-1);
   }
 
-  private static void quickSort(TrackedArray array, int start, int end) {
+  private void quickSort(TrackedArray array, int start, int end) {
     if (start < end) {
       int partitionIndex = partition(array, start, end);
 
@@ -16,7 +16,7 @@ public class QuickSort implements SortingAlgorithm {
       quickSort(array, partitionIndex+1, end);
     }
   }
-  private static int partition(TrackedArray array, int start, int end) {
+  private int partition(TrackedArray array, int start, int end) {
     int pivot = array.get(end);
 
     int i = start-1;
