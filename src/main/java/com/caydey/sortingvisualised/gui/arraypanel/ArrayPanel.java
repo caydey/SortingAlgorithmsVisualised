@@ -6,9 +6,28 @@ import java.awt.event.*;
 
 import com.caydey.sortingvisualised.array.TrackedArray;
 
-public class ArrayPanel extends JPanel {
+public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private TrackedArray trackedArray;
   private final int scale;
+
+  @Override
+  public void swapAction(int indexA, int indexB) {
+    repaint();
+    // System.out.println("swap");
+  }
+  @Override
+  public void comparisionAction(int indexA, int indexB) {
+    System.out.print("compare");
+  }
+  @Override
+  public void getAction(int index) {
+    System.out.println("get");
+  }
+  @Override
+  public void setAction(int index) {
+    System.out.println("set");
+  }
+
 
   public ArrayPanel(TrackedArray trackedArray) {
     this.trackedArray = trackedArray;

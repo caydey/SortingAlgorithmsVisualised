@@ -28,30 +28,12 @@ public class WindowFrame extends JFrame {
     c.fill = GridBagConstraints.BOTH;
     TrackedArray trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
     arrayPanel = new ArrayPanel(trackedArray);
-    trackedArray.setOperationListener(new ArrayOperationListener() {
-      @Override
-      public void swapAction(int indexA, int indexB) {
-        arrayPanel.repaint();
-        System.out.println("swap");
-      }
-      @Override
-      public void compareAction(int indexA, int indexB) {
-        System.out.print("compare");
-      }
-      @Override
-      public void getAction(int index) {
-        System.out.println("get");
-      }
-      @Override
-      public void setAction(int index) {
-        System.out.println("set");
-      }
-    });
+    trackedArray.setOperationListener(arrayPanel);
     add(arrayPanel, c);
 
 
     // start sorting in thread so it can sleep and run in parrallel
-    Runnable runnable = new SortArray(trackedArray, new InsertionSort());
+    Runnable runnable = new SortArray(trackedArray, new QuickSort());
     Thread thread = new Thread(runnable);
     thread.start();
 
