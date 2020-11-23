@@ -55,7 +55,7 @@ public class TrackedArray extends Array {
     return getElement(index);
   }
   public void set(int index, int val) {
-    operationListener.setAction(index, val); // call to action listener
+    operationListener.setAction(index); // call to action listener
     arrayOperations.incWrites(); // update operations count
     // set
     setElement(index, val);

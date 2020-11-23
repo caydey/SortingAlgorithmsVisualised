@@ -8,45 +8,82 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private TrackedArray trackedArray;
-  private final int scale;
+  private int scale;
 
-  private int[] lastCompared = new int[2]; // the 2 elements that were last compared with eachother
-  private int[] lastSwaped = new int[2]; // the 2 elements that were last swaped
+  // the index of elements that had an operation done on it
+  private int[] lastCompared;
+  private int[] lastSwaped;
+  private int lastGet;
+  private int lastSet;
 
   private boolean isArraySorted;
 
+  // show operations
+  private boolean showSwaps;
+  private boolean showComparisons;
+  private boolean showGets;
+  private boolean showSets;
+
+  public ArrayPanel() {
+    // set last operations to null
+    lastCompared = new int[] {-1,-1};
+    lastSwaped = new int[] {-1,-1};
+    lastGet = -1;
+    lastSet = -1;
+
+    // dont show operations (default)
+    showSwaps = false;
+    showComparisons = false;
+    showGets = false;
+    showSets = false;
+  }
+
+  public void setTrackedArray(TrackedArray trackedArray) {
+    this.trackedArray = trackedArray;
+    scale = 500/(trackedArray.length);
+  }
+
+  public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
+  public void setShowComparisons(boolean showComparisons) { this.showComparisons = showComparisons; }
+  public void setShowGets(boolean showGets) { this.showGets = showGets; }
+  public void setShowSets(boolean showSets) { this.showSets = showSets; }
+
+  // Action listeners
   @Override
   public void swapAction(int indexA, int indexB) {
-    lastSwaped[0] = indexA;
-    lastSwaped[1] = indexB;
-    repaint();
-    System.out.println("swap");
+    if (showSwaps) {
+      lastSwaped[0] = indexA;
+      lastSwaped[1] = indexB;
+      repaint();
+    }
   }
   @Override
   public void compareAction(int indexA, int indexB) {
-    lastCompared[0] = indexA;
-    lastCompared[1] = indexB;
-    repaint();
-    System.out.print("compare");
+    if (showComparisons) {
+      lastCompared[0] = indexA;
+      lastCompared[1] = indexB;
+      repaint();
+    }
   }
   @Override
   public void getAction(int index) {
-    System.out.println("get");
+    if (showGets) {
+      lastGet = index;
+      repaint();
+    }
   }
   @Override
-  public void setAction(int index, int value) {
-    System.out.println("set");
+  public void setAction(int index) {
+    if (showSets) {
+      lastSet = index;
+    }
+    // always repaint when an element is set
+    repaint();
   }
   @Override
   public void sortedAction() {
     isArraySorted = true;
-    System.out.println("sorted");
-  }
-
-
-  public ArrayPanel(TrackedArray trackedArray) {
-    this.trackedArray = trackedArray;
-    scale = 500/(trackedArray.length);
+    repaint();
   }
 
 
@@ -61,6 +98,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     g2d.setColor(Color.BLACK);
     int[] array = trackedArray.getArray();
     for (int i=0; i<array.length; i++) {
+      // color
       if (isArraySorted) {
         g2d.setColor(Color.GREEN);
       } else {
@@ -69,8 +107,13 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
           g2d.setColor(Color.BLUE);
         } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
           g2d.setColor(Color.RED);
+        } else if (i == lastSet) {
+          g2d.setColor(Color.RED);
+        } else if (i == lastGet) {
+          g2d.setColor(Color.YELLOW);
         }
       }
+      // array element
       g2d.fillRect(i*scale,500-((array[i]+1)*scale), scale,((array[i]+1)*scale));
     }
   }
