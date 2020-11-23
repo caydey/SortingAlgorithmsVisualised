@@ -4,5 +4,5 @@ public interface ArrayOperationListener {
   public void swapAction(int indexA, int indexB);
   public void compareAction(int indexA, int indexB);
   public void getAction(int index);
-  public void setAction(int index);
+  public void setAction(int index, int value);
 }

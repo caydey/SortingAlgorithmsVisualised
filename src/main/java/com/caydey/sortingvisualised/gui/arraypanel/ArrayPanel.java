@@ -24,7 +24,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     System.out.println("get");
   }
   @Override
-  public void setAction(int index) {
+  public void setAction(int index, int value) {
     System.out.println("set");
   }
 
