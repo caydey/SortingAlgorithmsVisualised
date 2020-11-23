@@ -70,17 +70,16 @@ public abstract class Array {
   public String toString() {
     String string = "";
 
-    for (int i=0; i<array.length; i++) {
-      for (int j=array.length-1; j>=0; j--) {
-        if (array[j] <= i) {
-          string += "#";
-        } else {
-          string += " ";
-        }
-      }
-      string +="\n";
-    }
-
+    // for (int i=0; i<array.length; i++) {
+    //   for (int j=array.length-1; j>=0; j--) {
+    //     if (array[j] <= i) {
+    //       string += "#";
+    //     } else {
+    //       string += " ";
+    //     }
+    //   }
+    //   string +="\n";
+    // }
 
     string += "[";
     for (int i=0; i<array.length; i++) {
