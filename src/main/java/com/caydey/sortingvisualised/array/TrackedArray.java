@@ -39,21 +39,25 @@ public class TrackedArray extends Array {
 
   // operations
   public void swap(int indexA, int indexB) {
-    sleep(10);
-    operationListener.swapAction(indexA, indexB);
-    // System.out.println(this);
-    arrayOperations.incSwaps();
+    sleep(10);  // delay
+    operationListener.swapAction(indexA, indexB); // call to action listener
+    arrayOperations.incSwaps(); // update operations count
+    // swap
     int tmp = get(indexA);
     set(indexA, get(indexB));
     set(indexB, tmp);
   }
 
   public int get(int index) {
-    arrayOperations.incReads();
+    operationListener.getAction(index); // call to action listener
+    arrayOperations.incReads(); // update operations count
+    // get
     return getElement(index);
   }
   public void set(int index, int val) {
-    arrayOperations.incWrites();
+    operationListener.setAction(index, val); // call to action listener
+    arrayOperations.incWrites(); // update operations count
+    // set
     setElement(index, val);
   }
 
@@ -73,24 +77,28 @@ public class TrackedArray extends Array {
 
   // Comparisons
   public boolean greaterThan(int a, int b) {
-    arrayOperations.incComparisons();
+    operationListener.compareAction(a, b); // call to action listener
+    arrayOperations.incComparisons(); // update operations count
     return (get(a) > get(b));
   }
   public boolean lessThan(int a, int b) {
-    arrayOperations.incComparisons();
+    operationListener.compareAction(a, b); // call to action listener
+    arrayOperations.incComparisons(); // update operations count
     return (get(a) < get(b));
   }
   public boolean greaterThanEquals(int a, int b) {
-    arrayOperations.incComparisons();
+    operationListener.compareAction(a, b); // call to action listener
+    arrayOperations.incComparisons(); // update operations count
     return (get(a) >= get(b));
   }
   public boolean lessThanEquals(int a, int b) {
-    arrayOperations.incComparisons();
+    operationListener.compareAction(a, b); // call to action listener
+    arrayOperations.incComparisons(); // update operations count
     return (get(a) <= get(b));
   }
 
   public void incComparisons() {
-    arrayOperations.incComparisons();
+    arrayOperations.incComparisons(); // update operations count
   }
 
 
