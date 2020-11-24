@@ -18,7 +18,8 @@ public class ControlPanel extends JPanel {
     "2ms",
     "5ms",
     "10ms",
-    "100ms"
+    "100ms",
+    "1000ms"
   };
   private ControlComboBox orderComboBox;
   private final String[] orderOptions = {
@@ -66,6 +67,7 @@ public class ControlPanel extends JPanel {
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
       delayComboBox = new ControlComboBox(delayOptions);
+      delayComboBox.setSelectedItem("10ms"); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -93,6 +95,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(orderComboBox);
 
       sizeComboBox = new ControlComboBox(sizeOptions);
+      sizeComboBox.setSelectedItem("500"); // Select "500" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -104,6 +107,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(sizeComboBox);
 
       sortsComboBox = new ControlComboBox(Sorts.getList()); // Sorts is an enum listing all sorting algorithms
+      sortsComboBox.setSelectedItem(Sorts.QUICK.getName()); // Select "Quick Sort" by default
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -112,7 +116,6 @@ public class ControlPanel extends JPanel {
           controlPanelListener.setSortingAlgorithmAction(algorithm); // call to action listener inside WindowFrame
         }
       });
-      sortsComboBox.setSelectedItem(Sorts.QUICK.getName()); // Select "Quick Sort" by default
       rightPanel.add(sortsComboBox);
 
     add(rightPanel, BorderLayout.LINE_END);

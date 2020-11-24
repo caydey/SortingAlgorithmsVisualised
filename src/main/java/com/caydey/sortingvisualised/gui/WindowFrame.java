@@ -22,6 +22,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
   private int arraySize;
+  private int arrayDelay;
   private ArrayOrder arrayOrder;
 
   private Runnable sortingRunnable;
@@ -57,11 +58,14 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     controlPanel = new ControlPanel(this); // pass ControlPanelListener
     add(controlPanel, c);
 
-    // initialize randomized array of 500 elements (default)
+    // initialize TrackedArray as randomized of 500 elements (default)
     arraySize = 500;
     arrayOrder = ArrayOrder.RANDOMIZED;
     trackedArray = new TrackedArray(arraySize, arrayOrder);
     arrayPanel.setTrackedArray(trackedArray);
+
+    // initialize SortingAlgorithm as QuickSort
+    sortingAlgorithm = new QuickSort();
 
     // true when array is being sorted
     isSorting = false;
@@ -95,10 +99,12 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
     // create new array, (sorting algorithm is defined in startAction)
     trackedArray = new TrackedArray(arraySize, arrayOrder);
+    trackedArray.setDelay(arrayDelay);
     arrayPanel.setTrackedArray(trackedArray);
   }
   @Override
   public void setDelayAction(int ms) {
+    arrayDelay = ms;
     trackedArray.setDelay(ms);
   }
   @Override
@@ -106,13 +112,13 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     this.sortingAlgorithm = sortingAlgorithm;
   }
   @Override
-  public void setArrayOrderAction(ArrayOrder arrayOrder) {
-    this.arrayOrder = arrayOrder;
+  public void setArrayOrderAction(ArrayOrder order) {
+    arrayOrder = order;
     resetAction();
   }
   @Override
-  public void setArraySizeAction(int arraySize) {
-    this.arraySize = arraySize;
+  public void setArraySizeAction(int size) {
+    arraySize = size;
     resetAction();
   }
 }
