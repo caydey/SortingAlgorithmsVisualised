@@ -68,7 +68,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
 
     // setResizable(false);
-    setSize(504,552); // 500+4(padding), 500+30(titlebar)+22(buttons)
+    setSize(504,554); // 500+4(padding), 500+30(titlebar)+24(buttons)
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
