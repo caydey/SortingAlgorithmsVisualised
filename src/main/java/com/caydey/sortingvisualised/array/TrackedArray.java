@@ -10,7 +10,7 @@ import java.util.TimerTask;
 public class TrackedArray extends Array {
   private ArrayOperations arrayOperations;
 
-  private int counter = 0;
+  private int delay;
 
   // listener
   private ArrayOperationListener operationListener;
@@ -20,16 +20,20 @@ public class TrackedArray extends Array {
 
   public TrackedArray(int length, ArrayOrder order) {
     super(length, order);
-    arrayOperations = new ArrayOperations();
+    arrayOperations = new ArrayOperations(); // counts swaps, gets, sets & comparisons
+    delay = 10; // 10ms delay by default
   }
 
-  // for when aray is split (mergeSort)
-  private TrackedArray(int[] array, ArrayOperations arrayOperations) {
-    super(array);
-    this.arrayOperations = arrayOperations;
-  }
+  // // for when aray is split (mergeSort)
+  // private TrackedArray(int[] array, ArrayOperations arrayOperations) {
+  //   super(array);
+  //   this.arrayOperations = arrayOperations;
+  // }
 
-  private void sleep(int delay) {
+  public void setDelay(int delay) {
+    this.delay = delay;
+  }
+  private void sleep() {
     try {
       Thread.sleep(delay);
     } catch (InterruptedException e) {
@@ -39,7 +43,7 @@ public class TrackedArray extends Array {
 
   // operations
   public void swap(int indexA, int indexB) {
-    sleep(10);  // delay
+    sleep();  // delay
     operationListener.swapAction(indexA, indexB); // call to action listener
     arrayOperations.incSwaps(); // update operations count
     // swap
@@ -47,7 +51,6 @@ public class TrackedArray extends Array {
     set(indexA, get(indexB));
     set(indexB, tmp);
   }
-
   public int get(int index) {
     operationListener.getAction(index); // call to action listener
     arrayOperations.incReads(); // update operations count
@@ -62,17 +65,17 @@ public class TrackedArray extends Array {
   }
 
 
-  public TrackedArray getSlice(int start, int end) {
-    // create int[] array slice
-    int[] arraySlice = new int[end-start];
-    for (int i=start; i<end; i++) {
-      arraySlice[i-start] = get(i);
-    }
-
-    // convert int[] to TrackedArray
-    TrackedArray trackedArraySlice = new TrackedArray(arraySlice, arrayOperations);
-    return trackedArraySlice;
-  }
+  // public TrackedArray getSlice(int start, int end) {
+  //   // create int[] array slice
+  //   int[] arraySlice = new int[end-start];
+  //   for (int i=start; i<end; i++) {
+  //     arraySlice[i-start] = get(i);
+  //   }
+  //
+  //   // convert int[] to TrackedArray
+  //   TrackedArray trackedArraySlice = new TrackedArray(arraySlice, arrayOperations);
+  //   return trackedArraySlice;
+  // }
 
 
   // Comparisons
@@ -101,11 +104,9 @@ public class TrackedArray extends Array {
     arrayOperations.incComparisons(); // update operations count
   }
 
-
   public void sorted() {
     operationListener.sortedAction(); // call to action listener
   }
-
 
   // arrayOperations getters
   public int getSwaps() { return arrayOperations.getSwaps(); }

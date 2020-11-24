@@ -21,6 +21,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
+  private int arraySize;
+  private ArrayOrder arrayOrder;
 
   private Runnable sortingRunnable;
   private Thread sortingThread;
@@ -30,8 +32,6 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   public WindowFrame() {
     // title
     super("Sorting Algorithms Visualised");
-
-
 
     // layout
     setLayout(new GridBagLayout());
@@ -50,18 +50,18 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     add(arrayPanel, c);
 
 
-    // control panel (start, stop, delay)
+    // control panel (start, stop ... delay,sort,order)
     c.gridx = 1; c.gridy = 1;
     c.weightx = 1.0; c.weighty = 0.0;
     c.fill = GridBagConstraints.HORIZONTAL;
     controlPanel = new ControlPanel(this); // pass ControlPanelListener
     add(controlPanel, c);
 
-
-    // default to randomized array of 500 elements
-    trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
+    // initialize randomized array of 500 elements (default)
+    arraySize = 500;
+    arrayOrder = ArrayOrder.RANDOMIZED;
+    trackedArray = new TrackedArray(arraySize, arrayOrder);
     arrayPanel.setTrackedArray(trackedArray);
-
 
     // true when array is being sorted
     isSorting = false;
@@ -76,8 +76,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
   @Override
   public void startAction() {
-    // start sorting in thread so it can sleep and run in parrallel
-    // without effecting porgram execution
+    // start sorting in thread so it can sleep and run
+    // in parrallel without effecting porgram execution
     if (!isSorting) { // dont sort an array thats already being sorted
       sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
       sortingThread = new Thread(sortingRunnable);
@@ -87,26 +87,32 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   }
   @Override
   public void resetAction() {
-    if (sortingRunnable != null) { // "start" pressed at least once
+    if (isSorting) { // if array is being sorted, terminate that bitch
       ((SortArray)sortingRunnable).setTerminating(); // tell SortArray that its terminating
       sortingThread.interrupt();  // terminate
       isSorting = false; // not sorting array
-
-      trackedArray = new TrackedArray(500, ArrayOrder.RANDOMIZED);
-      arrayPanel.setTrackedArray(trackedArray);
     }
 
+    // create new array, (sorting algorithm is defined in startAction)
+    trackedArray = new TrackedArray(arraySize, arrayOrder);
+    arrayPanel.setTrackedArray(trackedArray);
   }
   @Override
   public void setDelayAction(int ms) {
-    System.out.println("delay: "+ms);
+    trackedArray.setDelay(ms);
   }
   @Override
   public void setSortingAlgorithmAction(SortingAlgorithm sortingAlgorithm) {
     this.sortingAlgorithm = sortingAlgorithm;
   }
   @Override
-  public void setArrayOrder(ArrayOrder order) {
-    System.out.println("ArrayOrder");
+  public void setArrayOrderAction(ArrayOrder arrayOrder) {
+    this.arrayOrder = arrayOrder;
+    resetAction();
+  }
+  @Override
+  public void setArraySizeAction(int arraySize) {
+    this.arraySize = arraySize;
+    resetAction();
   }
 }

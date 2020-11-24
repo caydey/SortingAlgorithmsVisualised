@@ -6,12 +6,13 @@ import java.awt.event.*;
 
 import com.caydey.sortingvisualised.algorithms.Sorts;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
+import com.caydey.sortingvisualised.array.ArrayOrder;
 
 public class ControlPanel extends JPanel {
   private ControlButton startButton;
   private ControlButton resetButton;
 
-  private JComboBox delayComboBox;
+  private ControlComboBox delayComboBox;
   private final String[] delayOptions = {
     "1ms",
     "2ms",
@@ -19,8 +20,22 @@ public class ControlPanel extends JPanel {
     "10ms",
     "100ms"
   };
-
-  private JComboBox sortsComboBox;
+  private ControlComboBox orderComboBox;
+  private final String[] orderOptions = {
+    "Randomized",
+    "Reversed",
+    "Sorted"
+  };
+  private ControlComboBox sizeComboBox;
+  private final String[] sizeOptions = {
+    "8",
+    "16",
+    "64",
+    "100",
+    "250",
+    "500"
+  };
+  private ControlComboBox sortsComboBox;
 
   // Listener
   private ControlPanelListener controlPanelListener;
@@ -50,22 +65,49 @@ public class ControlPanel extends JPanel {
     add(leftPanel, BorderLayout.LINE_START);
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
-      delayComboBox = new JComboBox<String>(delayOptions);
+      delayComboBox = new ControlComboBox(delayOptions);
       delayComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          System.out.println("ms");
+          String delayStr = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+          int delay = Integer.parseInt(delayStr.substring(0,delayStr.length()-2));  // 10ms -> 10
+          controlPanelListener.setDelayAction(delay);
         }
       });
       rightPanel.add(delayComboBox);
 
+      orderComboBox = new ControlComboBox(orderOptions);
+      orderComboBox.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          String orderName = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+          ArrayOrder order = ArrayOrder.RANDOMIZED;
+          if (orderName.equals("Sorted")) {
+            order = ArrayOrder.SORTED;
+          } else if (orderName.equals("Reversed")) {
+            order = ArrayOrder.REVERSED;
+          }
+          controlPanelListener.setArrayOrderAction(order);
+        }
+      });
+      rightPanel.add(orderComboBox);
 
+      sizeComboBox = new ControlComboBox(sizeOptions);
+      sizeComboBox.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          String orderStr = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+          int order = Integer.parseInt(orderStr);
+          controlPanelListener.setArraySizeAction(order);
+        }
+      });
+      rightPanel.add(sizeComboBox);
 
-      sortsComboBox = new JComboBox<String>(Sorts.getList()); // Sorts is an enum listing all sorting algorithms
+      sortsComboBox = new ControlComboBox(Sorts.getList()); // Sorts is an enum listing all sorting algorithms
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          String sortName = (String)((JComboBox)e.getSource()).getSelectedItem();
+          String sortName = (String)((ControlComboBox)e.getSource()).getSelectedItem(); // "Quick Sort", "Cocktail Sort" etc...
           SortingAlgorithm algorithm = Sorts.getSortFromName(sortName).getSortObject(); // get enum of sorting algorithm and then gets sort object from enum
           controlPanelListener.setSortingAlgorithmAction(algorithm); // call to action listener inside WindowFrame
         }
