@@ -12,7 +12,11 @@ public class SortArray implements Runnable {
 
   private boolean isTerminating;
 
-  // casting sort to SortingAlgorithm throws comp error, bug with something (online research)
+  private ArraySortedListener arraySortedListener;
+  public void setArraySortedListener(ArraySortedListener arraySortedListener) {
+    this.arraySortedListener = arraySortedListener;
+  }
+
   public SortArray(TrackedArray array, SortingAlgorithm algorithm) {
     this.array = array;
     this.algorithm = algorithm;
@@ -29,7 +33,7 @@ public class SortArray implements Runnable {
   public void run() {
     algorithm.sort(array);
     if (!isTerminating) { // if sort is terminated dont sent sorted signal to array
-      array.sorted();
+      arraySortedListener.arraySortedAction();
     }
   }
 }

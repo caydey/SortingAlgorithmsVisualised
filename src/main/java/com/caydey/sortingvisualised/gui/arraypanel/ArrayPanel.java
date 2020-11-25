@@ -50,6 +50,10 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
 
     repaint();
   }
+  public void sortedAction() {
+    isArraySorted = true;
+    repaint();
+  }
 
   public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
   public void setShowComparisons(boolean showComparisons) { this.showComparisons = showComparisons; }
@@ -88,11 +92,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     // always repaint when an element is set
     repaint();
   }
-  @Override
-  public void sortedAction() {
-    isArraySorted = true;
-    repaint();
-  }
+
 
 
   public void paintComponent(Graphics g) {

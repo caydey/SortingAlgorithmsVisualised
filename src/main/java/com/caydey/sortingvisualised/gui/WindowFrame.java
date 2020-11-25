@@ -25,10 +25,11 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   private int arrayDelay;
   private ArrayOrder arrayOrder;
 
-  private Runnable sortingRunnable;
+  private SortArray sortingRunnable;
   private Thread sortingThread;
 
   private boolean isSorting;
+  private boolean isArraySorted;
 
   public WindowFrame() {
     // title
@@ -70,6 +71,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     sortingAlgorithm = new QuickSort();
 
     isSorting = false; // true when array is being sorted
+    isArraySorted = false; // true when array has had sorting algorithm applied to it
+
 
     // setResizable(false);
     setSize(504,554); // 500+4(padding), 500+30(titlebar)+24(buttons)
@@ -83,18 +86,30 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     // start sorting in thread so it can sleep and run
     // in parrallel without effecting porgram execution
     if (!isSorting) { // dont sort an array thats already being sorted
+      if (isArraySorted) {  // if array has been sorted and user wants to sort it again, reshuffle array
+        resetAction();
+      }
+      isSorting = true;
       sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
+      sortingRunnable.setArraySortedListener(new ArraySortedListener() {
+        @Override
+        public void arraySortedAction() {
+          isSorting = false;
+          isArraySorted = true;
+          arrayPanel.sortedAction();  // call to ArrayPanel to highlight array green
+        }
+      });
       sortingThread = new Thread(sortingRunnable);
       sortingThread.start();
-      isSorting = true;
     }
   }
   @Override
   public void resetAction() {
     if (isSorting) { // if array is being sorted, terminate that bitch
-      ((SortArray)sortingRunnable).setTerminating(); // tell SortArray that its terminating
+      sortingRunnable.setTerminating(); // tell SortArray that its terminating
       sortingThread.interrupt();  // terminate
       isSorting = false; // not sorting array
+      isArraySorted = false; // array has not been sorted
     }
 
     // create new array, (sorting algorithm is defined in startAction)

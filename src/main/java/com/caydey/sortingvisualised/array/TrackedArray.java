@@ -101,10 +101,6 @@ public class TrackedArray extends Array {
     arrayOperations.incComparisons(); // update operations count
   }
 
-  public void sorted() {
-    operationListener.sortedAction(); // call to action listener
-  }
-
   // arrayOperations getters
   public int getSwaps() { return arrayOperations.getSwaps(); }
   public int getComparisons() { return arrayOperations.getComparisons(); }
