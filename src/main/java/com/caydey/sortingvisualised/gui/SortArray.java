@@ -24,9 +24,6 @@ public class SortArray implements Runnable {
   }
   public void setTerminating() {
     isTerminating = true;
-    if (algorithm instanceof BogoSort) {  // bogosort is too powerfull to be stopped just by terminating it
-      ((BogoSort)algorithm).stop(); // method inside BogoSort to stop while loop
-    }
   }
 
   @Override
