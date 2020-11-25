@@ -4,9 +4,6 @@ package com.caydey.sortingvisualised.array;
 import com.caydey.sortingvisualised.gui.arraypanel.ArrayOperationListener;
 
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class TrackedArray extends Array {
   private ArrayOperations arrayOperations;
 
