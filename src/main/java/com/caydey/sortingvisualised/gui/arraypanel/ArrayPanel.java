@@ -49,9 +49,9 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   public void setTrackedArray(TrackedArray trackedArray) {
     isArraySorted = false; // given new array, assume its not sorted
     trackedArray.setOperationListener(this);  // so trackedarray can comunicate to this what is being compared with what etc
-    this.trackedArray = trackedArray;
 
-    scale = 500/(trackedArray.length);
+    this.trackedArray = trackedArray;
+    scale = panelSize / trackedArray.length;
 
     resetLastOperations(); // operations that were done on previous array
     repaint();
@@ -61,6 +61,11 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     // set last operations to null
     resetLastOperations();
     repaint();
+  }
+
+  public void updatePanelSize(int panelSize) {
+    this.panelSize = panelSize;
+    scale = panelSize / trackedArray.length;
   }
 
   public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
@@ -108,9 +113,8 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
       return;
     }
 
-    // clean
-    g2d.setColor(Color.WHITE);
-    g2d.fillRect(0,0, 500, 500);
+    // clear
+    g2d.clearRect(0,0, panelSize,panelSize);
 
     // bars
     g2d.setColor(Color.BLACK);
@@ -132,7 +136,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
         }
       }
       // array element
-      g2d.fillRect(i*scale,500-((array[i]+1)*scale), scale,((array[i]+1)*scale));
+      g2d.fillRect(i*scale,panelSize-((array[i]+1)*scale), scale,((array[i]+1)*scale));
     }
   }
 }

@@ -33,9 +33,9 @@ public class ControlPanel extends JPanel {
     "8",
     "16",
     "64",
-    "100",
-    "250",
-    "500"
+    "128",
+    "256",
+    "512"
   };
   private ControlComboBox sortsComboBox;
 
@@ -96,7 +96,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(orderComboBox);
 
       sizeComboBox = new ControlComboBox(sizeOptions);
-      sizeComboBox.setSelectedItem("500"); // Select "500" by default
+      sizeComboBox.setSelectedItem("512"); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

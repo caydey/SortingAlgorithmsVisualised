@@ -19,6 +19,9 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   private ArrayPanel arrayPanel;
   private ControlPanel controlPanel;
 
+  private static final int PADDING_X = 4;  // 4 window manager border
+  private static final int PADDING_Y = 54; // 30 titlebar, 24 buttons
+
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
   private int arraySize;
@@ -43,12 +46,12 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     c.gridx = 1; c.gridy = 0;
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
-    arrayPanel = new ArrayPanel(500); // 500x500
+    arrayPanel = new ArrayPanel(512); // 512x512px
     // arrayPanel.setTrackedArray(trackedArray);
     // arrayPanel.setShowSwaps(true);
     // arrayPanel.setShowGets(true);
     // arrayPanel.setShowSets(true);
-    // arrayPanel.setShowComparisons(true);
+    arrayPanel.setShowComparisons(true);
     add(arrayPanel, c);
 
 
@@ -60,7 +63,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     add(controlPanel, c);
 
     // initialize TrackedArray as randomized of 500 elements (default)
-    arraySize = 500;
+    arraySize = 512;
     arrayOrder = ArrayOrder.RANDOMIZED;
     // initialize TrackedArray delay to 10ms
     arrayDelay = 10;
@@ -74,8 +77,22 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     isArraySorted = false; // true when array has had sorting algorithm applied to it
 
 
-    // setResizable(false);
-    setSize(504,554); // 500+4(padding), 500+30(titlebar)+24(buttons)
+    // window size
+    setSize(512+PADDING_X, 512+PADDING_Y);
+    setMinimumSize(new Dimension(512+PADDING_X, 512+PADDING_Y));
+    addComponentListener(new ComponentAdapter() {
+      public void componentResized(ComponentEvent componentEvent) {
+        int width = getWidth() - PADDING_X;
+        int height = getHeight() - PADDING_Y;
+
+        int min = (width < height) ? width : height;
+        int newPanelSize = min - (min % 64);
+
+        arrayPanel.updatePanelSize(newPanelSize);
+        // System.out.println(newPanelSize);
+      }
+    });
+
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
