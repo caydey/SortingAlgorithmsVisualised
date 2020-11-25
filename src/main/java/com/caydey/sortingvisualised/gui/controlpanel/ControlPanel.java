@@ -14,11 +14,13 @@ public class ControlPanel extends JPanel {
 
   private ControlComboBox delayComboBox;
   private final String[] delayOptions = {
+    "0ms",
     "1ms",
     "2ms",
     "5ms",
     "10ms",
     "100ms",
+    "500ms",
     "1000ms"
   };
   private ControlComboBox orderComboBox;
