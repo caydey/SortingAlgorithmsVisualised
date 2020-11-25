@@ -63,6 +63,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     arrayOrder = ArrayOrder.RANDOMIZED;
     trackedArray = new TrackedArray(arraySize, arrayOrder);
     arrayPanel.setTrackedArray(trackedArray);
+    // initialize TrackedArray delay to 10ms
+    arrayDelay = 10;
 
     // initialize SortingAlgorithm as QuickSort
     sortingAlgorithm = new QuickSort();
