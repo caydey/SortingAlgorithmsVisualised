@@ -5,9 +5,13 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 import java.util.Random;
 
 public class BogoSort implements SortingAlgorithm {
+  // need stop variable and method because while loop causes some problems when terminating BogoSort Thread
+  private boolean stop;
+  public void stop() { stop = true; }
   @Override
   public void sort(TrackedArray array) {
-    while (!isSorted(array)) {
+    stop = false;
+    while (!isSorted(array) && !stop) {
       shuffle(array);
     }
   }
