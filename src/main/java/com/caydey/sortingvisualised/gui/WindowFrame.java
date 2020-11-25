@@ -62,10 +62,10 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     // initialize TrackedArray as randomized of 500 elements (default)
     arraySize = 500;
     arrayOrder = ArrayOrder.RANDOMIZED;
-    trackedArray = new TrackedArray(arraySize, arrayOrder);
-    arrayPanel.setTrackedArray(trackedArray);
     // initialize TrackedArray delay to 10ms
     arrayDelay = 10;
+    trackedArray = new TrackedArray(arraySize, arrayOrder);
+    arrayPanel.setTrackedArray(trackedArray);
 
     // initialize SortingAlgorithm as QuickSort
     sortingAlgorithm = new QuickSort();
@@ -89,16 +89,18 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
       if (isArraySorted) {  // if array has been sorted and user wants to sort it again, reshuffle array
         resetAction();
       }
-      isSorting = true;
+      isSorting = true; // Array is being sorted
       sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
+      // Listener for when algorithm has sorted array
       sortingRunnable.setArraySortedListener(new ArraySortedListener() {
         @Override
         public void arraySortedAction() {
           isSorting = false;
           isArraySorted = true;
-          arrayPanel.sortedAction();  // call to ArrayPanel to highlight array green
+          arrayPanel.setSorted();  // call to ArrayPanel to highlight array green
         }
       });
+      // create and start sorting algorithm thread
       sortingThread = new Thread(sortingRunnable);
       sortingThread.start();
     }

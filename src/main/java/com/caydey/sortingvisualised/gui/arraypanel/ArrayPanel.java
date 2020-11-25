@@ -12,8 +12,8 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private int panelSize;
 
   // the index of elements that had an operation done on it
-  private int[] lastCompared;
-  private int[] lastSwaped;
+  private int[] lastCompared =  new int[2];
+  private int[] lastSwaped = new int[2];
   private int lastGet;
   private int lastSet;
 
@@ -28,17 +28,22 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   public ArrayPanel(int panelSize) {
     this.panelSize = panelSize;
     setSize(panelSize, panelSize);
-    // set last operations to null
-    lastCompared = new int[] {-1,-1};
-    lastSwaped = new int[] {-1,-1};
-    lastGet = -1;
-    lastSet = -1;
+    // set last operations to null (-1)
+    resetLastOperations();
 
     // dont show operations (default)
     showSwaps = false;
     showComparisons = false;
     showGets = false;
     showSets = false;
+  }
+  private void resetLastOperations() {
+    lastCompared[0] = -1;
+    lastCompared[1] = -1;
+    lastSwaped[0] = -1;
+    lastSwaped[1] = -1;
+    lastGet = -1;
+    lastSet = -1;
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {
@@ -48,10 +53,13 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
 
     scale = 500/(trackedArray.length);
 
+    resetLastOperations(); // operations that were done on previous array
     repaint();
   }
-  public void sortedAction() {
+  public void setSorted() {
     isArraySorted = true;
+    // set last operations to null
+    resetLastOperations();
     repaint();
   }
 
@@ -92,8 +100,6 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     // always repaint when an element is set
     repaint();
   }
-
-
 
   public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D)g;
