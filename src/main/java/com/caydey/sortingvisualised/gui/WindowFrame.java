@@ -107,7 +107,11 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   public void resetAction() {
     if (isSorting) { // if array is being sorted, terminate that bitch
       sortingRunnable.setTerminating(); // tell SortArray that its terminating
-      sortingThread.interrupt();  // terminate
+
+      // terminate
+      sortingThread.interrupt();  // interrupt thread
+      while (sortingThread.isAlive()) { } // halt entire program code execution untill thread is kill and in a shallow grave
+
       isSorting = false; // not sorting array
       isArraySorted = false; // array has not been sorted
     }
