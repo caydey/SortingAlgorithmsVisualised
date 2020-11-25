@@ -14,7 +14,6 @@ public class ControlPanel extends JPanel {
 
   private ControlComboBox delayComboBox;
   private final String[] delayOptions = {
-    "0ms",
     "1ms",
     "2ms",
     "5ms",
