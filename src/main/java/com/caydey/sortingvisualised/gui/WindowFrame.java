@@ -69,9 +69,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     // initialize SortingAlgorithm as QuickSort
     sortingAlgorithm = new QuickSort();
 
-    // true when array is being sorted
-    isSorting = false;
-
+    isSorting = false; // true when array is being sorted
 
     // setResizable(false);
     setSize(504,554); // 500+4(padding), 500+30(titlebar)+24(buttons)
@@ -115,12 +113,16 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   }
   @Override
   public void setArrayOrderAction(ArrayOrder order) {
-    arrayOrder = order;
-    resetAction();
+    if (arrayOrder != order) {
+      arrayOrder = order;
+      resetAction();
+    }
   }
   @Override
   public void setArraySizeAction(int size) {
-    arraySize = size;
-    resetAction();
+    if (arraySize != size) {
+      arraySize = size;
+      resetAction();
+    }
   }
 }
