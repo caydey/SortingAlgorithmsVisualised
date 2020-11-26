@@ -3,12 +3,12 @@ package com.caydey.sortingvisualised.gui.arraypanel;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.*;
 
 import com.caydey.sortingvisualised.array.TrackedArray;
 
 public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private TrackedArray trackedArray;
-  private int scale;
   private int panelSize;
 
   // the index of elements that had an operation done on it
@@ -51,7 +51,6 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     trackedArray.setOperationListener(this);  // so trackedarray can comunicate to this what is being compared with what etc
 
     this.trackedArray = trackedArray;
-    scale = panelSize / trackedArray.length;
 
     resetLastOperations(); // operations that were done on previous array
     repaint();
@@ -65,7 +64,6 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
 
   public void updatePanelSize(int panelSize) {
     this.panelSize = panelSize;
-    scale = panelSize / trackedArray.length;
   }
 
   public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
@@ -109,34 +107,42 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D)g;
 
-    if (trackedArray == null) { // if array is not defined
-      return;
-    }
+    // if array is not defined
+    if (trackedArray == null) { return; }
+
+
+    int arrayLength = trackedArray.length;
+
+    // create square image, arrayLength x arrayLength
+    BufferedImage img = new BufferedImage(arrayLength, arrayLength, BufferedImage.TYPE_INT_RGB);
+    Graphics2D imgGraphics = img.createGraphics();  // convert to Graphics2D object
 
     // clear
-    g2d.clearRect(0,0, panelSize,panelSize);
+    imgGraphics.setColor(Color.WHITE);
+    imgGraphics.fillRect(0,0, arrayLength, arrayLength);
 
     // bars
-    g2d.setColor(Color.BLACK);
     int[] array = trackedArray.getArray();
     for (int i=0; i<array.length; i++) {
       // color
       if (isArraySorted) {
-        g2d.setColor(Color.GREEN);
+        imgGraphics.setColor(Color.GREEN);
       } else {
-        g2d.setColor(Color.BLACK);
+        imgGraphics.setColor(Color.BLACK);
         if (i == lastCompared[0] || i == lastCompared[1]) {
-          g2d.setColor(Color.BLUE);
+          imgGraphics.setColor(Color.BLUE);
         } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
-          g2d.setColor(Color.RED);
+          imgGraphics.setColor(Color.RED);
         } else if (i == lastSet) {
-          g2d.setColor(Color.RED);
+          imgGraphics.setColor(Color.RED);
         } else if (i == lastGet) {
-          g2d.setColor(Color.YELLOW);
+          imgGraphics.setColor(Color.YELLOW);
         }
       }
-      // array element
-      g2d.fillRect(i*scale,panelSize-((array[i]+1)*scale), scale,((array[i]+1)*scale));
+     // draw array item
+     imgGraphics.fillRect(i,arrayLength-((array[i]+1)), 1,((array[i]+1)));
     }
+    // streach image to fit on window
+    g2d.drawImage(img, 0,0, panelSize,panelSize, null);
   }
 }
