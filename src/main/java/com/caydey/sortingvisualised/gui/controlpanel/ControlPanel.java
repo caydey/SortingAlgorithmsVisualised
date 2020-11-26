@@ -13,6 +13,7 @@ public class ControlPanel extends JPanel {
   private ControlButton resetButton;
 
   private ControlComboBox delayComboBox;
+  private final String delayDefaultOption = "10ms";
   private final String[] delayOptions = {
     "1ms",
     "2ms",
@@ -23,12 +24,14 @@ public class ControlPanel extends JPanel {
     "1000ms"
   };
   private ControlComboBox orderComboBox;
+  private final String orderDefaultOption = "Randomized";
   private final String[] orderOptions = {
     "Randomized",
     "Reversed",
     "Sorted"
   };
   private ControlComboBox sizeComboBox;
+  private final String sizeDefaultOption = "512";
   private final String[] sizeOptions = {
     "8",
     "16",
@@ -71,7 +74,7 @@ public class ControlPanel extends JPanel {
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
       delayComboBox = new ControlComboBox(delayOptions);
-      delayComboBox.setSelectedItem("10ms"); // Select "10ms" by default
+      delayComboBox.setSelectedItem(delayDefaultOption); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -83,6 +86,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(delayComboBox);
 
       orderComboBox = new ControlComboBox(orderOptions);
+      orderComboBox.setSelectedItem(orderDefaultOption); // Select "Randomized" by default
       orderComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -99,7 +103,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(orderComboBox);
 
       sizeComboBox = new ControlComboBox(sizeOptions);
-      sizeComboBox.setSelectedItem("512"); // Select "512" by default
+      sizeComboBox.setSelectedItem(sizeDefaultOption); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -121,7 +125,6 @@ public class ControlPanel extends JPanel {
         }
       });
       rightPanel.add(sortsComboBox);
-
     add(rightPanel, BorderLayout.LINE_END);
 
   }
