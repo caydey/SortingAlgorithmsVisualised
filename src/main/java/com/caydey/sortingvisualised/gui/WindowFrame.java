@@ -87,6 +87,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
         int min = (width < height) ? width : height;
         int newPanelSize = min - (min % 64);
+        setSize(newPanelSize+PADDING_X, newPanelSize+PADDING_Y);  // snap window size
 
         arrayPanel.updatePanelSize(newPanelSize);
         // System.out.println(newPanelSize);
