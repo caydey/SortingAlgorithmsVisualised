@@ -35,7 +35,10 @@ public class ControlPanel extends JPanel {
     "64",
     "128",
     "256",
-    "512"
+    "512",
+    "1024",
+    "2048",
+    "4096"
   };
   private ControlComboBox sortsComboBox;
 
