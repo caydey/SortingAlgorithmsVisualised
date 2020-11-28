@@ -3,26 +3,51 @@ package com.caydey.sortingvisualised.gui.controlpanel.combobox;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.table.*;
-import java.util.*;
+
+import java.util.ArrayList;
 
 public class ControlComboCheckBox extends JComboBox<JCheckBox> {
   private JLabel titleLabel;
 
+  private ArrayList<String> selectedItems;
+
   public ControlComboCheckBox(String title, JCheckBox[] checkBoxes) {
     super(checkBoxes);
+
+    // title
+    titleLabel = new JLabel(title);
 
     // height & width
     setPreferredSize(new Dimension(120,20));
 
+    // CheckBoxes
+    setCheckBoxes();
 
-    titleLabel = new JLabel(title);
+    // look
+    setRenderer(new ComboBoxRenderer());
     setForeground(Color.BLACK);
     setBackground(new Color(224,255,255)); // Light Cyan
     setFocusable(false);
-
-    addCheckBoxes();
   }
+
+  private void setCheckBoxes() {
+    selectedItems = new ArrayList<String>();  // tooltip
+    addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        // toggle selection
+        JCheckBox checkBox = (JCheckBox)getSelectedItem();
+        checkBox.setSelected(!checkBox.isSelected());
+
+        // tooltip
+        if (checkBox.isSelected()) { selectedItems.add(checkBox.getText()); }
+        else { selectedItems.remove(checkBox.getText()); }
+
+        String toolTipText = String.join(", ", selectedItems);
+        setToolTipText(toolTipText);
+      }
+    });
+  }
+
   public JCheckBox getSelection() {
     return (JCheckBox)getSelectedItem();
   }
@@ -33,19 +58,6 @@ public class ControlComboCheckBox extends JComboBox<JCheckBox> {
       checkBoxes[i] = new JCheckBox(checkBoxTitles[i]);
     }
     return checkBoxes;
-  }
-
-  private void addCheckBoxes() {
-    setRenderer(new ComboBoxRenderer());
-    addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        itemSelected();
-      }
-    });
-  }
-  private void itemSelected() {
-    JCheckBox checkBox = (JCheckBox)getSelectedItem();
-    checkBox.setSelected(!checkBox.isSelected()); // toggle selection
   }
 
   private class ComboBoxRenderer implements ListCellRenderer<JCheckBox> {

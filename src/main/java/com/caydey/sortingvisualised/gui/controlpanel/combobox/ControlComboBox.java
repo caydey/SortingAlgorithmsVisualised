@@ -12,13 +12,8 @@ public class ControlComboBox extends JComboBox<String> {
     // title
     titleLabel = new JLabel(title);
 
-    // tooltip to selected item
-    addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        String selectedItem = (String)getSelectedItem();  // selected item
-        setToolTipText(selectedItem); // set tooltip to selected item
-      }
-    });
+    // Labels
+    addLabels();
 
     // set height to 20px
     Dimension dimension = getPreferredSize();
@@ -31,6 +26,16 @@ public class ControlComboBox extends JComboBox<String> {
     setBackground(new Color(224,255,255)); // Light Cyan
     setFocusable(false);
 
+  }
+
+  private void addLabels() {
+    // tooltip for selected item
+    addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        String selectedItem = (String)getSelectedItem();  // selected item
+        setToolTipText(selectedItem); // set tooltip to selected item
+      }
+    });
   }
 
   private class ComboBoxRenderer implements ListCellRenderer<String> {
