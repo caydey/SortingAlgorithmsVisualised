@@ -17,7 +17,7 @@ public class ControlPanel extends JPanel {
 
   private ControlComboBox delayComboBox;
   private final String delayOptionTitle = "Delay";
-  private final String delayDefaultOption = "10ms";
+  private final int delayDefaultOption = 3;
   private final String[] delayOptions = {
     "1ms",
     "2ms",
@@ -29,7 +29,7 @@ public class ControlPanel extends JPanel {
   };
   ControlComboCheckBox shownComboCheckBox;
   private final String shownOptionTitle = "Shown";
-  private final int shownDefaultOptionIndex = 1;
+  private final int shownDefaultOption = 1;
   private final String[] shownOptions = new String[] {
     "Swaps",
     "Comparisons",
@@ -38,7 +38,7 @@ public class ControlPanel extends JPanel {
   };
   private ControlComboBox orderComboBox;
   private final String orderOptionTitle = "Order";
-  private final String orderDefaultOption = "Random";
+  private final int orderDefaultOption = 0;
   private final String[] orderOptions = {
     "Random",
     "Reversed",
@@ -46,7 +46,7 @@ public class ControlPanel extends JPanel {
   };
   private ControlComboBox sizeComboBox;
   private final String sizeOptionTitle = "Size";
-  private final String sizeDefaultOption = "512";
+  private final int sizeDefaultOption = 5;
   private final String[] sizeOptions = {
     "8",
     "16",
@@ -60,6 +60,8 @@ public class ControlPanel extends JPanel {
   };
   private ControlComboBox sortsComboBox;
   private final String sortsOptionTitle = "Sort";
+  private final String sortsDefaultOption = Sorts.QUICK.getName();
+  private final String[] sortsOptions = Sorts.getList();
 
   // Listener
   private ControlPanelListener controlPanelListener;
@@ -90,7 +92,7 @@ public class ControlPanel extends JPanel {
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
       delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions);
-      delayComboBox.setSelectedItem(delayDefaultOption); // Select "10ms" by default
+      delayComboBox.setSelectedIndex(delayDefaultOption); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -102,7 +104,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(delayComboBox);
 
       shownComboCheckBox = new ControlComboCheckBox(shownOptionTitle, ControlComboCheckBox.createCheckBoxes(shownOptions));
-      shownComboCheckBox.setSelectedIndex(shownDefaultOptionIndex);
+      shownComboCheckBox.setSelectedIndex(shownDefaultOption);
       shownComboCheckBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -123,7 +125,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(shownComboCheckBox);
 
       orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions);
-      orderComboBox.setSelectedItem(orderDefaultOption); // Select "Randomized" by default
+      orderComboBox.setSelectedIndex(orderDefaultOption); // Select "Randomized" by default
       orderComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -140,7 +142,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(orderComboBox);
 
       sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions);
-      sizeComboBox.setSelectedItem(sizeDefaultOption); // Select "512" by default
+      sizeComboBox.setSelectedIndex(sizeDefaultOption); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -151,8 +153,8 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(sizeComboBox);
 
-      sortsComboBox = new ControlComboBox(sortsOptionTitle, Sorts.getList()); // Sorts is an enum listing all sorting algorithms
-      sortsComboBox.setSelectedItem(Sorts.QUICK.getName()); // Select "Quick Sort" by default
+      sortsComboBox = new ControlComboBox(sortsOptionTitle, sortsOptions); // Sorts is an enum listing all sorting algorithms
+      sortsComboBox.setSelectedItem(sortsDefaultOption); // Select "Quick Sort" by default
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
