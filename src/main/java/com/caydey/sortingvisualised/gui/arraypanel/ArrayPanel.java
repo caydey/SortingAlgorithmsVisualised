@@ -52,7 +52,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
 
     this.trackedArray = trackedArray;
 
-    resetLastOperations(); // operations that were done on previous array
+    resetLastOperations(); // reset operations that were done on previous array
     repaint();
   }
   public void setSorted() {
@@ -66,10 +66,28 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     this.panelSize = panelSize;
   }
 
-  public void setShowSwaps(boolean showSwaps) { this.showSwaps = showSwaps; }
-  public void setShowComparisons(boolean showComparisons) { this.showComparisons = showComparisons; }
-  public void setShowGets(boolean showGets) { this.showGets = showGets; }
-  public void setShowSets(boolean showSets) { this.showSets = showSets; }
+  public void setShowSwaps(boolean showSwaps) {
+    this.showSwaps = showSwaps;
+    // reset swaps
+    lastSwaped[0] = -1;
+    lastSwaped[1] = -1;
+  }
+  public void setShowComparisons(boolean showComparisons) {
+    this.showComparisons = showComparisons;
+    // reset comparisons
+    lastCompared[0] = -1;
+    lastCompared[1] = -1;
+  }
+  public void setShowGets(boolean showGets) {
+    this.showGets = showGets;
+    // reset gets
+    lastGet = -1;
+  }
+  public void setShowSets(boolean showSets) {
+    this.showSets = showSets;
+    // reset sets
+    lastSet = -1;
+  }
 
   // Action listeners
   @Override
