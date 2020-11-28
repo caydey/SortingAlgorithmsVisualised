@@ -1,6 +1,7 @@
 package com.caydey.sortingvisualised.gui.controlpanel.combobox;
 
 import javax.swing.*;
+import java.awt.event.*;
 import java.awt.*;
 
 public class ControlComboBox extends JComboBox<String> {
@@ -11,17 +12,25 @@ public class ControlComboBox extends JComboBox<String> {
     // title
     titleLabel = new JLabel(title);
 
+    // tooltip to selected item
+    addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        String selectedItem = (String)getSelectedItem();  // selected item
+        setToolTipText(selectedItem); // set tooltip to selected item
+      }
+    });
+
     // set height to 20px
     Dimension dimension = getPreferredSize();
     dimension.height = 20;
     setPreferredSize(dimension);
 
+    // look
+    setRenderer(new ComboBoxRenderer());
     setForeground(Color.BLACK);
     setBackground(new Color(224,255,255)); // Light Cyan
     setFocusable(false);
-    setBorder(null);
 
-    setRenderer(new ComboBoxRenderer());
   }
 
   private class ComboBoxRenderer implements ListCellRenderer<String> {
@@ -38,7 +47,7 @@ public class ControlComboBox extends JComboBox<String> {
       JLabel labelElement = new JLabel(value);
       labelElement.setOpaque(true);
       labelElement.setForeground(Color.BLACK);
-      
+
       Component c = (Component)(labelElement);
       // highlight label as mouse hovers over it
       if (isSelected) {

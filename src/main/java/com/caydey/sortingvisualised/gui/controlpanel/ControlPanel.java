@@ -70,6 +70,9 @@ public class ControlPanel extends JPanel {
     this.controlPanelListener = controlPanelListener;
     setLayout(new BorderLayout());
 
+    // Set tooltip delay to 0
+    ToolTipManager.sharedInstance().setInitialDelay(0);
+
     JPanel leftPanel = new JPanel(new GridBagLayout());
       // Start
       startButton = new ControlButton(ButtonType.START);
