@@ -27,9 +27,10 @@ public class ControlPanel extends JPanel {
     "100ms",
     "500ms"
   };
-  ControlComboCheckBox showComboCheckBox;
-  private final String showOptionTitle = "Show";
-  private final String[] showOptions = new String[] {
+  ControlComboCheckBox shownComboCheckBox;
+  private final String shownOptionTitle = "Shown";
+  private final int shownDefaultOptionIndex = 1;
+  private final String[] shownOptions = new String[] {
     "Swaps",
     "Comparisons",
     "Gets",
@@ -100,8 +101,9 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(delayComboBox);
 
-      showComboCheckBox = new ControlComboCheckBox(showOptionTitle, ControlComboCheckBox.createCheckBoxes(showOptions));
-      showComboCheckBox.addActionListener(new ActionListener() {
+      shownComboCheckBox = new ControlComboCheckBox(shownOptionTitle, ControlComboCheckBox.createCheckBoxes(shownOptions));
+      shownComboCheckBox.setSelectedIndex(shownDefaultOptionIndex);
+      shownComboCheckBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
           JCheckBox checkBox = ((ControlComboCheckBox)e.getSource()).getSelection();
@@ -118,7 +120,7 @@ public class ControlPanel extends JPanel {
           controlPanelListener.setOperationsShownAction(operation, state);
         }
       });
-      rightPanel.add(showComboCheckBox);
+      rightPanel.add(shownComboCheckBox);
 
       orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions);
       orderComboBox.setSelectedItem(orderDefaultOption); // Select "Randomized" by default
