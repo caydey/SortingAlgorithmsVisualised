@@ -11,4 +11,5 @@ public interface ControlPanelListener {
   public void setSortingAlgorithmAction(SortingAlgorithm sortingAlgorithm);
   public void setArrayOrderAction(ArrayOrder order);
   public void setArraySizeAction(int size);
+  public void setOperationsShownAction(OperationType operation, boolean shown);
 }

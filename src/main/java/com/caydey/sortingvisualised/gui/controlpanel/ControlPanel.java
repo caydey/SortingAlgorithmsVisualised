@@ -8,29 +8,43 @@ import com.caydey.sortingvisualised.algorithms.Sorts;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.array.ArrayOrder;
 
+import com.caydey.sortingvisualised.gui.controlpanel.button.*;
+import com.caydey.sortingvisualised.gui.controlpanel.combobox.*;
+
 public class ControlPanel extends JPanel {
   private ControlButton startButton;
   private ControlButton resetButton;
 
   private ControlComboBox delayComboBox;
+  private final String delayOptionTitle = "Delay";
   private final String delayDefaultOption = "10ms";
   private final String[] delayOptions = {
     "1ms",
     "2ms",
     "5ms",
     "10ms",
+    "20ms",
     "100ms",
-    "500ms",
-    "1000ms"
+    "500ms"
+  };
+  ControlComboCheckBox showComboCheckBox;
+  private final String showOptionTitle = "Show";
+  private final String[] showOptions = new String[] {
+    "Swaps",
+    "Comparisons",
+    "Gets",
+    "Sets"
   };
   private ControlComboBox orderComboBox;
-  private final String orderDefaultOption = "Randomized";
+  private final String orderOptionTitle = "Order";
+  private final String orderDefaultOption = "Random";
   private final String[] orderOptions = {
-    "Randomized",
+    "Random",
     "Reversed",
     "Sorted"
   };
   private ControlComboBox sizeComboBox;
+  private final String sizeOptionTitle = "Size";
   private final String sizeDefaultOption = "512";
   private final String[] sizeOptions = {
     "8",
@@ -44,6 +58,7 @@ public class ControlPanel extends JPanel {
     "4096"
   };
   private ControlComboBox sortsComboBox;
+  private final String sortsOptionTitle = "Sort";
 
   // Listener
   private ControlPanelListener controlPanelListener;
@@ -53,7 +68,7 @@ public class ControlPanel extends JPanel {
     setLayout(new BorderLayout());
 
     JPanel leftPanel = new JPanel(new GridBagLayout());
-      startButton = new ControlButton("Start", new Color(44,238,144)); // LIGHT GREEN
+      startButton = new ControlButton(ButtonType.START);
       startButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -62,7 +77,7 @@ public class ControlPanel extends JPanel {
       });
       leftPanel.add(startButton);
 
-      resetButton = new ControlButton("Reset", new Color(250,128,114)); // SALMON
+      resetButton = new ControlButton(ButtonType.RESET);
       resetButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -73,7 +88,7 @@ public class ControlPanel extends JPanel {
     add(leftPanel, BorderLayout.LINE_START);
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
-      delayComboBox = new ControlComboBox(delayOptions);
+      delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions);
       delayComboBox.setSelectedItem(delayDefaultOption); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
         @Override
@@ -85,7 +100,27 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(delayComboBox);
 
-      orderComboBox = new ControlComboBox(orderOptions);
+      showComboCheckBox = new ControlComboCheckBox(showOptionTitle, ControlComboCheckBox.createCheckBoxes(showOptions));
+      showComboCheckBox.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          JCheckBox checkBox = ((ControlComboCheckBox)e.getSource()).getSelection();
+          boolean state = !checkBox.isSelected(); // inversed as this action event is called before the state change action is
+          String operationName = checkBox.getText();
+          OperationType operation = OperationType.SWAPS;
+          if (operationName.equals("Comparisons")) {
+            operation = OperationType.COMPARISONS;
+          } else if (operationName.equals("Gets")) {
+            operation = OperationType.GETS;
+          } else if (operationName.equals("Sets")) {
+            operation = OperationType.SETS;
+          }
+          controlPanelListener.setOperationsShownAction(operation, state);
+        }
+      });
+      rightPanel.add(showComboCheckBox);
+
+      orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions);
       orderComboBox.setSelectedItem(orderDefaultOption); // Select "Randomized" by default
       orderComboBox.addActionListener(new ActionListener() {
         @Override
@@ -102,7 +137,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(orderComboBox);
 
-      sizeComboBox = new ControlComboBox(sizeOptions);
+      sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions);
       sizeComboBox.setSelectedItem(sizeDefaultOption); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
@@ -114,7 +149,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(sizeComboBox);
 
-      sortsComboBox = new ControlComboBox(Sorts.getList()); // Sorts is an enum listing all sorting algorithms
+      sortsComboBox = new ControlComboBox(sortsOptionTitle, Sorts.getList()); // Sorts is an enum listing all sorting algorithms
       sortsComboBox.setSelectedItem(Sorts.QUICK.getName()); // Select "Quick Sort" by default
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
@@ -125,7 +160,10 @@ public class ControlPanel extends JPanel {
         }
       });
       rightPanel.add(sortsComboBox);
+
     add(rightPanel, BorderLayout.LINE_END);
 
+    // JPanel bottomPanel = new JPanel(new GridBagLayout());
+    // add(bottomPanel, BorderLayout.PAGE_END);
   }
 }

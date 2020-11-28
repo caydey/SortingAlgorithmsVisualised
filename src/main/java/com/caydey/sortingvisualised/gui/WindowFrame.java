@@ -13,6 +13,7 @@ import com.caydey.sortingvisualised.algorithms.QuickSort;
 import com.caydey.sortingvisualised.gui.arraypanel.ArrayPanel;
 import com.caydey.sortingvisualised.gui.controlpanel.ControlPanel;
 import com.caydey.sortingvisualised.gui.controlpanel.ControlPanelListener;
+import com.caydey.sortingvisualised.gui.controlpanel.OperationType;
 
 
 public class WindowFrame extends JFrame implements ControlPanelListener {
@@ -20,7 +21,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   private ControlPanel controlPanel;
 
   private static final int PADDING_X = 4;  // 4 window manager border
-  private static final int PADDING_Y = 54; // 30 titlebar, 24 buttons
+  private static final int PADDING_Y = 50; // 30 titlebar, 20 buttons
 
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
@@ -162,6 +163,23 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     if (arraySize != size) {
       arraySize = size;
       resetAction();
+    }
+  }
+  @Override
+  public void setOperationsShownAction(OperationType operation, boolean shown) {
+    switch (operation) {
+      case SWAPS:
+        arrayPanel.setShowSwaps(shown);
+        break;
+      case COMPARISONS:
+        arrayPanel.setShowComparisons(shown);
+        break;
+      case GETS:
+        arrayPanel.setShowGets(shown);
+        break;
+      case SETS:
+        arrayPanel.setShowSets(shown);
+        break;
     }
   }
 }
