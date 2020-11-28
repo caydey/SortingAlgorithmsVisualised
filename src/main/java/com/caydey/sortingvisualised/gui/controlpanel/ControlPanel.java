@@ -71,6 +71,7 @@ public class ControlPanel extends JPanel {
     setLayout(new BorderLayout());
 
     JPanel leftPanel = new JPanel(new GridBagLayout());
+      // Start
       startButton = new ControlButton(ButtonType.START);
       startButton.addActionListener(new ActionListener() {
         @Override
@@ -80,6 +81,7 @@ public class ControlPanel extends JPanel {
       });
       leftPanel.add(startButton);
 
+      // Reset
       resetButton = new ControlButton(ButtonType.RESET);
       resetButton.addActionListener(new ActionListener() {
         @Override
@@ -91,6 +93,7 @@ public class ControlPanel extends JPanel {
     add(leftPanel, BorderLayout.LINE_START);
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
+      // Delay [1ms, 2ms, 5ms, 10ms, 20ms, 100ms, 500ms]
       delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions);
       delayComboBox.setSelectedIndex(delayDefaultOption); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
@@ -103,6 +106,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(delayComboBox);
 
+      // Shown [Swaps, Comparisons, Gets, Sets]
       shownComboCheckBox = new ControlComboCheckBox(shownOptionTitle, ControlComboCheckBox.createCheckBoxes(shownOptions));
       shownComboCheckBox.setSelectedIndex(shownDefaultOption);
       shownComboCheckBox.addActionListener(new ActionListener() {
@@ -124,6 +128,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(shownComboCheckBox);
 
+      // Order [Randomized, Sorted, Reversed]
       orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions);
       orderComboBox.setSelectedIndex(orderDefaultOption); // Select "Randomized" by default
       orderComboBox.addActionListener(new ActionListener() {
@@ -141,6 +146,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(orderComboBox);
 
+      // Size [8, 16, 64, 128, 256, 512, 1024, 2048, 4096]
       sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions);
       sizeComboBox.setSelectedIndex(sizeDefaultOption); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
@@ -153,6 +159,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(sizeComboBox);
 
+      // Sorts
       sortsComboBox = new ControlComboBox(sortsOptionTitle, sortsOptions); // Sorts is an enum listing all sorting algorithms
       sortsComboBox.setSelectedItem(sortsDefaultOption); // Select "Quick Sort" by default
       sortsComboBox.addActionListener(new ActionListener() {
@@ -164,10 +171,6 @@ public class ControlPanel extends JPanel {
         }
       });
       rightPanel.add(sortsComboBox);
-
     add(rightPanel, BorderLayout.LINE_END);
-
-    // JPanel bottomPanel = new JPanel(new GridBagLayout());
-    // add(bottomPanel, BorderLayout.PAGE_END);
   }
 }
