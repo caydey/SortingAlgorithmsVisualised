@@ -75,30 +75,11 @@ public class TrackedArray extends Array {
   // }
 
 
-  // Comparisons
-  public boolean greaterThan(int a, int b) {
+  // Comparison
+  public int compareIndexes(int a, int b) {
     operationListener.compareAction(a, b); // call to action listener
     arrayOperations.incComparisons(); // update operations count
-    return (get(a) > get(b));
-  }
-  public boolean lessThan(int a, int b) {
-    operationListener.compareAction(a, b); // call to action listener
-    arrayOperations.incComparisons(); // update operations count
-    return (get(a) < get(b));
-  }
-  public boolean greaterThanEquals(int a, int b) {
-    operationListener.compareAction(a, b); // call to action listener
-    arrayOperations.incComparisons(); // update operations count
-    return (get(a) >= get(b));
-  }
-  public boolean lessThanEquals(int a, int b) {
-    operationListener.compareAction(a, b); // call to action listener
-    arrayOperations.incComparisons(); // update operations count
-    return (get(a) <= get(b));
-  }
-  public void compare(int a, int b) { // for logging purposes
-    operationListener.compareAction(a, b); // call to action listener
-    arrayOperations.incComparisons(); // update operations count
+    return (get(a) - get(b));
   }
 
   // arrayOperations getters

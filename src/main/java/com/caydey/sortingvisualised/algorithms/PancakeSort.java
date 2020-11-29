@@ -30,7 +30,7 @@ public class PancakeSort implements SortingAlgorithm {
   private int getMax(TrackedArray array, int end) {
     int max = 0;
     for (int i=1; i<end; i++) {
-      if (array.greaterThan(i, max)) {
+      if (array.compareIndexes(i, max) > 0) { // i > max
         max = i;
       }
     }

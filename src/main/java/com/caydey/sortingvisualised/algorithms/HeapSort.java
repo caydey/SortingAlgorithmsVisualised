@@ -30,12 +30,12 @@ public class HeapSort implements SortingAlgorithm {
     int right = (2*i)+2;
 
     // If left child is larger than root
-    if (left < length && array.greaterThan(left, largest)) {
+    if (left < length && array.compareIndexes(left, largest) > 0) { // left > largest
       largest = left;
     }
 
     // If right child is larger than largest so far
-    if (right < length && array.greaterThan(right, largest)) {
+    if (right < length && array.compareIndexes(right, largest) > 0) { // right > largest
       largest = right;
     }
 

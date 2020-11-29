@@ -12,7 +12,7 @@ public class CocktailSort implements SortingAlgorithm {
     while (swapped) {
       swapped = false;
       for (int i=start; i<end-1; ++i) {
-        if (array.greaterThan(i, i+1)) {
+        if (array.compareIndexes(i, i+1) > 0) {  // i > i+1
           array.swap(i, i+1);
           swapped = true;
         }
@@ -25,7 +25,7 @@ public class CocktailSort implements SortingAlgorithm {
 
       swapped = false;
       for (int i=end-1; i>=start; i--) {
-        if (array.greaterThan(i, i+1)) {
+        if (array.compareIndexes(i, i+1) > 0) {  // i > i+1
           array.swap(i, i+1);
           swapped = true;
         }

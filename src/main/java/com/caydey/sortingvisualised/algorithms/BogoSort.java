@@ -22,7 +22,7 @@ public class BogoSort implements SortingAlgorithm {
 
   private boolean isSorted(TrackedArray array) {
     for (int i=0; i<array.length-1; i++) {
-      if (array.greaterThan(i, i+1)) {
+      if (array.compareIndexes(i, i+1) > 0) { // i > i+1
         return false;
       }
     }

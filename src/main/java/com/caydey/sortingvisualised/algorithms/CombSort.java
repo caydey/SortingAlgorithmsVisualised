@@ -15,7 +15,7 @@ public class CombSort implements SortingAlgorithm {
 
       swapped = false;
       for (int i=0; i<array.length-gap; i++) {
-        if (array.greaterThan(i, i+gap)) {
+        if (array.compareIndexes(i, i+gap) > 0) {  // i > i+gap
           array.swap(i, i+gap);
           swapped = true;
         }
