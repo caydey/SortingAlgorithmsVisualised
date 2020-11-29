@@ -39,6 +39,11 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     // title
     super("Sorting Algorithms Visualised");
 
+    // icon
+    ImageIcon icon = new ImageIcon(getClass().getResource("/icon.png"));
+    setIconImage(icon.getImage());
+
+
     // layout
     setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
