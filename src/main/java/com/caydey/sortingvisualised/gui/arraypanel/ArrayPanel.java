@@ -17,7 +17,8 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private int lastGet;
   private int lastSet;
 
-  private boolean isArraySorted;
+  private int sortAnimationIndex;
+  private Timer sortAnimationTimer;
 
   // show operations
   private boolean showSwaps;
@@ -30,6 +31,9 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     setSize(panelSize, panelSize);
     // set last operations to null (-1)
     resetLastOperations();
+
+    // sorting animation
+    sortAnimationIndex = -1;
 
     // dont show operations (default)
     showSwaps = false;
@@ -47,7 +51,10 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {
-    isArraySorted = false; // given new array, assume its not sorted
+    if (sortAnimationIndex != -1) { // if sorted animation is running, stop it
+      sortAnimationTimer.stop();
+    }
+    sortAnimationIndex = -1; // given new array, assume its not sorted
     trackedArray.setOperationListener(this);  // so trackedarray can comunicate to this what is being compared with what etc
 
     this.trackedArray = trackedArray;
@@ -56,9 +63,24 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     repaint();
   }
   public void setSorted() {
-    isArraySorted = true;
     // set last operations to null
     resetLastOperations();
+
+    // animation
+    sortAnimationIndex = 0;
+    ActionListener al = new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        sortAnimationIndex += (int) (trackedArray.length / 100) + 1;
+        if (sortAnimationIndex >= trackedArray.length) {
+          sortAnimationTimer.stop();
+        }
+        repaint();
+      }
+    };
+    int animationDelay = 1000 / trackedArray.length;
+    if (animationDelay == 0) { animationDelay = 1; }
+    sortAnimationTimer = new Timer(animationDelay, al);
+    sortAnimationTimer.start();
     repaint();
   }
 
@@ -143,7 +165,7 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     int[] array = trackedArray.getArray();
     for (int i=0; i<array.length; i++) {
       // color
-      if (isArraySorted) {
+      if (i <= sortAnimationIndex) {
         imgGraphics.setColor(Color.GREEN);
       } else {
         imgGraphics.setColor(Color.BLACK);
