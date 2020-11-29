@@ -43,7 +43,7 @@ public class ControlComboCheckBox extends JComboBox<JCheckBox> {
         else { selectedItems.remove(checkBox.getText()); }
 
         String toolTipText = String.join(", ", selectedItems);
-        setToolTipText(toolTipText);
+        setToolTipText("<html><strong>"+toolTipText+"</strong></html>");
       }
     });
   }

@@ -33,7 +33,7 @@ public class ControlComboBox extends JComboBox<String> {
     addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         String selectedItem = (String)getSelectedItem();  // selected item
-        setToolTipText(selectedItem); // set tooltip to selected item
+        setToolTipText("<html><strong>"+selectedItem+"</strong></html>"); // set tooltip to selected item
       }
     });
   }
