@@ -19,7 +19,8 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.1</version>
 				<configuration>
-					<outputDirectory>${project.deployDirectory}</outputDirectory>
+					<outputDirectory>${project.basedir}</outputDirectory>
+					<finalName>${project.artifactId}</finalName>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
