@@ -48,7 +48,7 @@ public abstract class Array {
   }
   private void reversed() {
     for (int i=0; i<array.length; i++) {
-      array[i] = array.length-i;
+      array[i] = array.length-i-1;
     }
   }
   private void randomized() {
