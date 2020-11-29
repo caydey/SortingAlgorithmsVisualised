@@ -68,6 +68,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     controlPanel = new ControlPanel(this); // pass ControlPanelListener
     add(controlPanel, c);
 
+
     // initialize TrackedArray as randomized of 500 elements (default)
     arraySize = 512;
     arrayOrder = ArrayOrder.RANDOMIZED;
@@ -99,6 +100,12 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
         // System.out.println(newPanelSize);
       }
     });
+
+    // ToolTip
+    ToolTipManager.sharedInstance().setInitialDelay(100); // popup delay
+    UIManager.put("ToolTip.foreground", Color.BLACK);
+    UIManager.put("ToolTip.background", new Color(224,255,255)); // Light Cyan
+
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
