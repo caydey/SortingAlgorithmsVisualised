@@ -95,7 +95,7 @@ public class ControlPanel extends JPanel {
 
     JPanel rightPanel = new JPanel(new GridBagLayout());
       // Delay [1ms, 2ms, 5ms, 10ms, 20ms, 100ms, 500ms]
-      delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions);
+      delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions, false);
       delayComboBox.setSelectedIndex(delayDefaultOption); // Select "10ms" by default
       delayComboBox.addActionListener(new ActionListener() {
         @Override
@@ -130,7 +130,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(shownComboCheckBox);
 
       // Order [Randomized, Sorted, Reversed]
-      orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions);
+      orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions, false);
       orderComboBox.setSelectedIndex(orderDefaultOption); // Select "Randomized" by default
       orderComboBox.addActionListener(new ActionListener() {
         @Override
@@ -148,7 +148,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(orderComboBox);
 
       // Size [8, 16, 64, 128, 256, 512, 1024, 2048, 4096]
-      sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions);
+      sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions, false);
       sizeComboBox.setSelectedIndex(sizeDefaultOption); // Select "512" by default
       sizeComboBox.addActionListener(new ActionListener() {
         @Override
@@ -161,7 +161,7 @@ public class ControlPanel extends JPanel {
       rightPanel.add(sizeComboBox);
 
       // Sorts
-      sortsComboBox = new ControlComboBox(sortsOptionTitle, sortsOptions); // Sorts is an enum listing all sorting algorithms
+      sortsComboBox = new ControlComboBox(sortsOptionTitle, sortsOptions, true); // Sorts is an enum listing all sorting algorithms
       sortsComboBox.setSelectedItem(sortsDefaultOption); // Select "Quick Sort" by default
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
