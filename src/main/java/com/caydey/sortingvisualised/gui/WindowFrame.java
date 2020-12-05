@@ -106,7 +106,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     UIManager.put("ToolTip.foreground", Color.BLACK);
     UIManager.put("ToolTip.background", new Color(224,255,255)); // Light Cyan
 
-
+    setLocationRelativeTo(null);  // center window
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
