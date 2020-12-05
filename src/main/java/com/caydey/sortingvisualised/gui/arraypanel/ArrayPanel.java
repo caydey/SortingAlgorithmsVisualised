@@ -11,20 +11,35 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private TrackedArray trackedArray;
   private int panelSize;
 
-  // the index of elements that had an operation done on it
+  // Index of elements that had an operation done on it
   private int[] lastCompared =  new int[2];
   private int[] lastSwaped = new int[2];
   private int lastGet;
   private int lastSet;
 
+  // Sorted animation
   private int sortAnimationIndex;
   private Timer sortAnimationTimer;
 
-  // show operations
+  // Show operations
   private boolean showSwaps;
   private boolean showComparisons;
   private boolean showGets;
   private boolean showSets;
+
+  // Graphics
+  private BufferedImage img;
+  private Graphics2D imgGraphics;
+
+  // Colors
+  private static final Color COLOR_BACKGROUND = Color.WHITE;
+  private static final Color COLOR_ELEMENT = Color.BLACK;
+  private static final Color COLOR_SORTED = Color.GREEN;
+  private static final Color COLOR_COMPARE = Color.BLUE;
+  private static final Color COLOR_SWAP = Color.RED;
+  private static final Color COLOR_GET = Color.YELLOW;
+  private static final Color COLOR_SET = Color.YELLOW;
+
 
   public ArrayPanel(int panelSize) {
     this.panelSize = panelSize;
@@ -60,6 +75,10 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     this.trackedArray = trackedArray;
 
     resetLastOperations(); // reset operations that were done on previous array
+
+    // initialize graphics for array
+    initializeGraphics();
+
     repaint();
   }
   public void setSorted() {
@@ -144,45 +163,45 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
     repaint();
   }
 
-  public void paintComponent(Graphics g) {
-    Graphics2D g2d = (Graphics2D)g;
-
-    // if array is not defined
-    if (trackedArray == null) { return; }
-
-
-    int arrayLength = trackedArray.length;
-
+  // Graphics
+  private void initializeGraphics() {
     // create square image, arrayLength x arrayLength
-    BufferedImage img = new BufferedImage(arrayLength, arrayLength, BufferedImage.TYPE_INT_RGB);
-    Graphics2D imgGraphics = img.createGraphics();  // convert to Graphics2D object
+    img = new BufferedImage(trackedArray.length, trackedArray.length, BufferedImage.TYPE_INT_RGB);
+    imgGraphics = img.createGraphics();  // convert to Graphics2D object
+  }
 
-    // clear
-    imgGraphics.setColor(Color.WHITE);
-    imgGraphics.fillRect(0,0, arrayLength, arrayLength);
+  public void paintComponent(Graphics g) {
+    if (trackedArray != null) { // if array is defined
+      Graphics2D g2d = (Graphics2D)g;
+      int arrayLength = trackedArray.length;
 
-    // bars
-    int[] array = trackedArray.getArray();
-    for (int i=0; i<array.length; i++) {
-      // color
-      if (i <= sortAnimationIndex) {
-        imgGraphics.setColor(Color.GREEN);
-      } else {
-        imgGraphics.setColor(Color.BLACK);
-        if (i == lastCompared[0] || i == lastCompared[1]) {
-          imgGraphics.setColor(Color.BLUE);
-        } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
-          imgGraphics.setColor(Color.RED);
-        } else if (i == lastSet) {
-          imgGraphics.setColor(Color.RED);
-        } else if (i == lastGet) {
-          imgGraphics.setColor(Color.YELLOW);
+      // background
+      imgGraphics.setColor(COLOR_BACKGROUND);
+      imgGraphics.fillRect(0,0, arrayLength, arrayLength);
+
+      // bars
+      int[] array = trackedArray.getArray();
+      for (int i=0; i<array.length; i++) {
+        // color
+        if (i <= sortAnimationIndex) {
+          imgGraphics.setColor(COLOR_SORTED);
+        } else {
+          imgGraphics.setColor(COLOR_ELEMENT);
+          if (i == lastCompared[0] || i == lastCompared[1]) {
+            imgGraphics.setColor(COLOR_COMPARE);
+          } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
+            imgGraphics.setColor(COLOR_SWAP);
+          } else if (i == lastSet) {
+            imgGraphics.setColor(COLOR_SET);
+          } else if (i == lastGet) {
+            imgGraphics.setColor(COLOR_GET);
+          }
         }
+        // draw array element
+        imgGraphics.fillRect(i,arrayLength-array[i]-1, 1,array[i]+1);
       }
-     // draw array item
-     imgGraphics.fillRect(i,arrayLength-((array[i]+1)), 1,((array[i]+1)));
+      // streach image to fit on window
+      g2d.drawImage(img, 0,0, panelSize,panelSize, null);
     }
-    // streach image to fit on window
-    g2d.drawImage(img, 0,0, panelSize,panelSize, null);
   }
 }
