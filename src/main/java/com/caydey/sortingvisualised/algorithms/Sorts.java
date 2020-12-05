@@ -7,6 +7,7 @@ public enum Sorts {
   COMB("Comb Sort"),
   HEAP("Heap Sort"),
   INSERTION("Insertion Sort"),
+  MERGE("Merge Sort"),
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort");
 
@@ -52,6 +53,8 @@ public enum Sorts {
         return new HeapSort();
       case INSERTION:
         return new InsertionSort();
+      case MERGE:
+        return new MergeSort();
       case PANCAKE:
         return new PancakeSort();
       case QUICK:

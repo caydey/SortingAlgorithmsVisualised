@@ -15,6 +15,7 @@ public class MergeSort implements SortingAlgorithm {
       TrackedArray left = array.getSlice(0, mid);
       TrackedArray right = array.getSlice(end-mid, array.length);
 
+
       // recursive
       mergeSort(left, mid);
       mergeSort(right, end-mid);
@@ -26,8 +27,7 @@ public class MergeSort implements SortingAlgorithm {
   private void merge(TrackedArray array, TrackedArray left, TrackedArray right, int leftPos, int rightPos) {
     int i=0, j=0, k=0;
     while (i < leftPos && j < rightPos) {
-      // make into trackedArray method left.greaterthanequals(i, right, j)
-      array.compare(i, j);
+      array.logComparedIndexes(i, rightPos+j);
       if (left.get(i) <= right.get(j)) {
         array.set(k++, left.get(i++));
       } else {
