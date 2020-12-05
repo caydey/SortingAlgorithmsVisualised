@@ -10,7 +10,8 @@ public enum Sorts {
   INSERTION("Insertion Sort"),
   MERGE("Merge Sort"),
   PANCAKE("Pancake Sort"),
-  QUICK("Quick Sort");
+  QUICK("Quick Sort"),
+  SELECTION("Selection Sort");
 
   private String name;
 
@@ -62,6 +63,8 @@ public enum Sorts {
         return new PancakeSort();
       case QUICK:
         return new QuickSort();
+      case SELECTION:
+        return new SelectionSort();
       default:
         return null;
     }
