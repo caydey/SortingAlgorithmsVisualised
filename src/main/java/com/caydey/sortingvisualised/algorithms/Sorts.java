@@ -1,6 +1,7 @@
 package com.caydey.sortingvisualised.algorithms;
 
 public enum Sorts {
+  BITONIC("Bitonic Sort"),
   BOGO("Bogo Sort"),
   BUBBLE("Bubble Sort"),
   COCKTAIL("Cocktail Sort"),
@@ -41,6 +42,8 @@ public enum Sorts {
 
   public SortingAlgorithm getSortObject() {
     switch (this) {
+      case BITONIC:
+        return new BitonicSort();
       case BOGO:
         return new BogoSort();
       case BUBBLE:
