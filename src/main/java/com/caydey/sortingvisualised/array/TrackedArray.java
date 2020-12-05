@@ -81,6 +81,11 @@ public class TrackedArray extends Array {
     arrayOperations.incComparisons(); // update operations count
     return (get(a) - get(b));
   }
+  public void logComparedIndexes(int a, int b) {
+    sleep();  // delay
+    operationListener.compareAction(a+relativeIndex, b+relativeIndex); // call to action listener
+    arrayOperations.incComparisons(); // update operations count
+  }
 
   // arrayOperations getters
   public int getSwaps() { return arrayOperations.getSwaps(); }

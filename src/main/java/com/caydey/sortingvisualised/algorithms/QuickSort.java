@@ -23,7 +23,7 @@ public class QuickSort implements SortingAlgorithm {
     int i = start-1;
 
     for (int j=start; j<end; j++) {
-      array.compareIndexes(j, end); // only needed to log comparison
+      array.logComparedIndexes(j, end); // only needed to log comparison
       if (array.get(j) <= pivot) {
         i++;
         array.swap(i, j);
