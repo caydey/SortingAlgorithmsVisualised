@@ -6,6 +6,7 @@ public enum Sorts {
   BUBBLE("Bubble Sort"),
   COCKTAIL("Cocktail Sort"),
   COMB("Comb Sort"),
+  GNOME("Gnome Sort"),
   HEAP("Heap Sort"),
   INSERTION("Insertion Sort"),
   MERGE("Merge Sort"),
@@ -53,6 +54,8 @@ public enum Sorts {
         return new CocktailSort();
       case COMB:
         return new CombSort();
+      case GNOME:
+        return new GnomeSort();
       case HEAP:
         return new HeapSort();
       case INSERTION:
