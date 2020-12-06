@@ -32,8 +32,8 @@ public class ArrayPanel extends JPanel implements ArrayOperationListener {
   private Graphics2D imgGraphics;
 
   // Colors
-  private static final Color COLOR_BACKGROUND = Color.WHITE;
-  private static final Color COLOR_ELEMENT = Color.BLACK;
+  private static final Color COLOR_BACKGROUND = Color.BLACK;
+  private static final Color COLOR_ELEMENT = Color.WHITE;
   private static final Color COLOR_SORTED = Color.GREEN;
   private static final Color COLOR_COMPARE = Color.BLUE;
   private static final Color COLOR_SWAP = Color.RED;
