@@ -19,6 +19,7 @@ public class ControlComboBox extends JComboBox<String> {
     // title
     titleLabel = new JLabel(title);
 
+
     // Labels
     addLabels();
 
@@ -28,6 +29,7 @@ public class ControlComboBox extends JComboBox<String> {
     setPreferredSize(dimension);
 
     // look
+    setMaximumRowCount(12);  // dropdown size
     setRenderer(new ComboBoxRenderer());
     setForeground(Color.BLACK);
     setBackground(new Color(224,255,255)); // Light Cyan
