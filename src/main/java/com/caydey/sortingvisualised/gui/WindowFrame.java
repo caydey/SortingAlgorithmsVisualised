@@ -115,8 +115,8 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
   @Override
   public void startAction() {
     // start sorting in thread so it can sleep and run
-    // in parrallel without effecting porgram execution
-    if (!isSorting) { // dont sort an array thats already being sorted
+    // in parrallel without effecting program execution
+    if (!isSorting) { // dont sort an array thats currently being sorted
       if (isArraySorted) {  // if array has been sorted and user wants to sort it again, reshuffle array
         resetAction();
       }
@@ -143,7 +143,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
 
       // terminate
       sortingThread.interrupt();  // interrupt thread
-      while (sortingThread.isAlive()) { } // halt entire program code execution untill thread is kill and in a shallow grave
+      while (sortingThread.isAlive()) { } // halt entire program code execution untill thread is killed and in a shallow grave
 
       isSorting = false; // not sorting array
       isArraySorted = false; // array has not been sorted
