@@ -1,4 +1,4 @@
-package com.caydey.sortingvisualised.gui.controlpanel;
+package com.caydey.sortingvisualised.gui.toolbarpanel;
 
 public enum OperationType {
   SWAPS, COMPARISONS, GETS, SETS;
