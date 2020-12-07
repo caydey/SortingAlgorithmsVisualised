@@ -68,7 +68,42 @@ public class ToolbarPanel extends JPanel {
     setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
 
+
+    // Order [Randomized, Sorted, Reversed]
+    c.gridx=0;
+    orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions, false);
+    orderComboBox.setSelectedIndex(orderDefaultOption); // Select "Randomized" by default
+    orderComboBox.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String orderName = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+        ArrayOrder order = ArrayOrder.RANDOMIZED;
+        if (orderName.equals("Sorted")) {
+          order = ArrayOrder.SORTED;
+        } else if (orderName.equals("Reversed")) {
+          order = ArrayOrder.REVERSED;
+        }
+        toolbarPanelListener.setArrayOrderAction(order);
+      }
+    });
+    add(orderComboBox, c);
+
+    // Size [8, 16, 64, 128, 256, 512, 1024, 2048, 4096]
+    c.gridx=1;
+    sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions, false);
+    sizeComboBox.setSelectedIndex(sizeDefaultOption); // Select "512" by default
+    sizeComboBox.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String orderStr = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+        int order = Integer.parseInt(orderStr);
+        toolbarPanelListener.setArraySizeAction(order);
+      }
+    });
+    add(sizeComboBox, c);
+
     // Delay [1ms, 2ms, 5ms, 10ms, 20ms, 100ms, 500ms]
+    c.gridx=2;
     delayComboBox = new ControlComboBox(delayOptionTitle, delayOptions, false);
     delayComboBox.setSelectedIndex(delayDefaultOption); // Select "10ms" by default
     delayComboBox.addActionListener(new ActionListener() {
@@ -79,9 +114,10 @@ public class ToolbarPanel extends JPanel {
         toolbarPanelListener.setDelayAction(delay);
       }
     });
-    add(delayComboBox);
+    add(delayComboBox, c);
 
     // Shown [Swaps, Comparisons, Gets, Sets]
+    c.gridx=3;
     shownComboCheckBox = new ControlComboCheckBox(shownOptionTitle, ControlComboCheckBox.createCheckBoxes(shownOptions));
     shownComboCheckBox.setSelectedIndex(shownDefaultOption);
     shownComboCheckBox.addActionListener(new ActionListener() {
@@ -101,37 +137,12 @@ public class ToolbarPanel extends JPanel {
         toolbarPanelListener.setOperationsShownAction(operation, state);
       }
     });
-    add(shownComboCheckBox);
+    add(shownComboCheckBox, c);
 
-    // Order [Randomized, Sorted, Reversed]
-    orderComboBox = new ControlComboBox(orderOptionTitle, orderOptions, false);
-    orderComboBox.setSelectedIndex(orderDefaultOption); // Select "Randomized" by default
-    orderComboBox.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String orderName = (String)((ControlComboBox)e.getSource()).getSelectedItem();
-        ArrayOrder order = ArrayOrder.RANDOMIZED;
-        if (orderName.equals("Sorted")) {
-          order = ArrayOrder.SORTED;
-        } else if (orderName.equals("Reversed")) {
-          order = ArrayOrder.REVERSED;
-        }
-        toolbarPanelListener.setArrayOrderAction(order);
-      }
-    });
-    add(orderComboBox);
+    c.gridx=4;
+    c.weightx=1.0;
+    JLabel paddLabel = new JLabel();
+    add(paddLabel,c);
 
-    // Size [8, 16, 64, 128, 256, 512, 1024, 2048, 4096]
-    sizeComboBox = new ControlComboBox(sizeOptionTitle, sizeOptions, false);
-    sizeComboBox.setSelectedIndex(sizeDefaultOption); // Select "512" by default
-    sizeComboBox.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String orderStr = (String)((ControlComboBox)e.getSource()).getSelectedItem();
-        int order = Integer.parseInt(orderStr);
-        toolbarPanelListener.setArraySizeAction(order);
-      }
-    });
-    add(sizeComboBox);
   }
 }
