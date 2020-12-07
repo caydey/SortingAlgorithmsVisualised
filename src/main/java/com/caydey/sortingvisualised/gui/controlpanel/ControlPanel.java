@@ -21,6 +21,8 @@ public class ControlPanel extends JPanel {
   private final String sortsDefaultOption = Sorts.QUICK.getName();
   private final String[] sortsOptions = Sorts.getList();
 
+  private final static Color COLOR_BACKGROUND = new Color(24,24,24);
+
   // Listener
   private ControlPanelListener controlPanelListener;
   public void setControlPanelListener(ControlPanelListener controlPanelListener) {
@@ -66,5 +68,7 @@ public class ControlPanel extends JPanel {
       });
       rightPanel.add(sortsComboBox);
     add(rightPanel, BorderLayout.LINE_END);
+
+    setBackground(COLOR_BACKGROUND);
   }
 }

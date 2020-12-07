@@ -56,6 +56,8 @@ public class ToolbarPanel extends JPanel {
     "4096"
   };
 
+  private final static Color COLOR_BACKGROUND = new Color(24,24,24);
+
   // Listener
   private ToolbarPanelListener toolbarPanelListener;
   public void setToolbarPanelListener(ToolbarPanelListener toolbarPanelListener) {
@@ -144,5 +146,6 @@ public class ToolbarPanel extends JPanel {
     JLabel paddLabel = new JLabel();
     add(paddLabel,c);
 
+    setBackground(COLOR_BACKGROUND);
   }
 }
