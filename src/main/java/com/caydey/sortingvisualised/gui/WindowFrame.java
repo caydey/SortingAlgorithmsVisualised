@@ -26,7 +26,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
   private ControlPanel controlPanel;
 
   private static final int PADDING_X = 4;  // 4 window manager border
-  private static final int PADDING_Y = 50; // 30 titlebar, 20 buttons
+  private static final int PADDING_Y = 70; // 30 titlebar, 20 toolbar, 20 controlpanel
 
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
