@@ -1,4 +1,4 @@
-package com.caydey.sortingvisualised.gui.controlpanel.combobox;
+package com.caydey.sortingvisualised.gui.combobox;
 
 import javax.swing.*;
 import java.awt.*;

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ControlButton extends JButton {
   public ControlButton(ButtonType type) {
-    setPreferredSize(new Dimension(19,20));
+    setPreferredSize(new Dimension(20,20));
 
 
     String iconPath = "/start.png";

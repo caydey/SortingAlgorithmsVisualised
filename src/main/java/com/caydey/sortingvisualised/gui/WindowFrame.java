@@ -11,17 +11,22 @@ import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.algorithms.QuickSort;
 
 import com.caydey.sortingvisualised.gui.arraypanel.ArrayPanel;
+
 import com.caydey.sortingvisualised.gui.controlpanel.ControlPanel;
 import com.caydey.sortingvisualised.gui.controlpanel.ControlPanelListener;
-import com.caydey.sortingvisualised.gui.controlpanel.OperationType;
+
+import com.caydey.sortingvisualised.gui.toolbarpanel.ToolbarPanel;
+import com.caydey.sortingvisualised.gui.toolbarpanel.OperationType;
+import com.caydey.sortingvisualised.gui.toolbarpanel.ToolbarPanelListener;
 
 
-public class WindowFrame extends JFrame implements ControlPanelListener {
+public class WindowFrame extends JFrame implements ControlPanelListener, ToolbarPanelListener {
+  private ToolbarPanel toolbarPanel;
   private ArrayPanel arrayPanel;
   private ControlPanel controlPanel;
 
   private static final int PADDING_X = 4;  // 4 window manager border
-  private static final int PADDING_Y = 50; // 30 titlebar, 20 buttons
+  private static final int PADDING_Y = 70; // 30 titlebar, 20 toolbar, 20 controlpanel
 
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
@@ -48,24 +53,29 @@ public class WindowFrame extends JFrame implements ControlPanelListener {
     setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
 
+    // toolbar
+    c.gridx = 0; c.gridy = 0;
+    c.weightx = 1.0; c.weighty = 0.0;
+    c.fill = GridBagConstraints.HORIZONTAL;
+    toolbarPanel = new ToolbarPanel();
+    toolbarPanel.setToolbarPanelListener(this); // pass ToolbarPanelListener
+    add(toolbarPanel, c);
+
     // canvas
-    c.gridx = 1; c.gridy = 0;
+    c.gridx = 0; c.gridy = 1;
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
     arrayPanel = new ArrayPanel(512); // 512x512px
-    // arrayPanel.setTrackedArray(trackedArray);
-    // arrayPanel.setShowSwaps(true);
-    // arrayPanel.setShowGets(true);
-    // arrayPanel.setShowSets(true);
     arrayPanel.setShowComparisons(true);
     add(arrayPanel, c);
 
 
-    // control panel (start, stop ... delay,sort,order)
-    c.gridx = 1; c.gridy = 1;
+    // control panel (start, stop ... sorting-algorithm)
+    c.gridx = 0; c.gridy = 2;
     c.weightx = 1.0; c.weighty = 0.0;
     c.fill = GridBagConstraints.HORIZONTAL;
-    controlPanel = new ControlPanel(this); // pass ControlPanelListener
+    controlPanel = new ControlPanel();
+    controlPanel.setControlPanelListener(this); // pass ControlPanelListener
     add(controlPanel, c);
 
 
