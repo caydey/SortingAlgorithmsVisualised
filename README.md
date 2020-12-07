@@ -19,7 +19,7 @@
 - Selection Sort
 
 
-### Installation
+### Build
 #### Maven
 ```
 mvn install
