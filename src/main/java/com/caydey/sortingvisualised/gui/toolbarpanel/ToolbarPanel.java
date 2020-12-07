@@ -8,13 +8,10 @@ import com.caydey.sortingvisualised.algorithms.Sorts;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.array.ArrayOrder;
 
-import com.caydey.sortingvisualised.gui.controlpanel.button.*;
-import com.caydey.sortingvisualised.gui.controlpanel.combobox.*;
+
+import com.caydey.sortingvisualised.gui.combobox.*;
 
 public class ToolbarPanel extends JPanel {
-  private ControlButton startButton;
-  private ControlButton resetButton;
-
   private ControlComboBox delayComboBox;
   private final String delayOptionTitle = "Delay";
   private final int delayDefaultOption = 3;

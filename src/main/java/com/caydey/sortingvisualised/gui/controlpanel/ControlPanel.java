@@ -9,7 +9,7 @@ import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.array.ArrayOrder;
 
 import com.caydey.sortingvisualised.gui.controlpanel.button.*;
-import com.caydey.sortingvisualised.gui.controlpanel.combobox.*;
+import com.caydey.sortingvisualised.gui.combobox.*;
 
 public class ControlPanel extends JPanel {
   private ControlButton startButton;
