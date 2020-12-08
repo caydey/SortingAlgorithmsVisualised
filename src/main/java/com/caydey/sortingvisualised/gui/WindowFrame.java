@@ -65,8 +65,9 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     c.gridx = 0; c.gridy = 1;
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
-    arrayPanel = new ArrayPanel(512); // 512x512px
-    arrayPanel.setShowComparisons(true);
+    arrayPanel = new ArrayPanel();
+    arrayPanel.setShowComparisons(true);  // show comparisons (default)
+    arrayPanel.setPanelSize(512); // 512x512px
     add(arrayPanel, c);
 
 
@@ -106,7 +107,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
         int newPanelSize = min;
         setSize(newPanelSize+PADDING_X, newPanelSize+PADDING_Y);  // snap window size
 
-        arrayPanel.updatePanelSize(newPanelSize);
+        arrayPanel.setPanelSize(newPanelSize);
         // System.out.println(newPanelSize);
       }
     });
