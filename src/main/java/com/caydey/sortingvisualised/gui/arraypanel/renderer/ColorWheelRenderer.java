@@ -6,7 +6,7 @@ import java.awt.image.*;
 
 import java.awt.geom.Arc2D;
 
-public class PieRenderer extends ArrayRenderer {
+public class ColorWheelRenderer extends ArrayRenderer {
   private int imgSize;
   @Override
   public void initializeGraphics() {
