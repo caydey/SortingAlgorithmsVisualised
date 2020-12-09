@@ -8,8 +8,9 @@ import java.awt.geom.Arc2D;
 
 public class ColorWheelRenderer extends ArrayRenderer {
   private int imgSize;
+  
   @Override
-  public void initializeGraphics() {
+  protected void initializeGraphics() {
     imgSize = (panelSize < arrayLength) ? arrayLength : panelSize;  // best resolution
     img = new BufferedImage(imgSize, imgSize, BufferedImage.TYPE_INT_RGB);
     imgGraphics = img.createGraphics();  // convert to Graphics2D object
