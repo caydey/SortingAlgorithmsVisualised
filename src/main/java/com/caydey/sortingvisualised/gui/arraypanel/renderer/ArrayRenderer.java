@@ -11,7 +11,6 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
   protected TrackedArray trackedArray;
   protected int arrayLength;
   protected int panelSize;
-  protected int imgSize;
 
   // Colors
   protected static final Color COLOR_BACKGROUND = Color.BLACK;
@@ -77,6 +76,8 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     this.trackedArray = trackedArray;
     this.arrayLength = trackedArray.length;
 
+    trackedArray.setOperationListener(this); // so trackedarray can comunicate to this what is being compared with what etc
+
     // set last operations to null (-1)
     resetLastOperations();
 
@@ -140,6 +141,21 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     }
     // always repaint when an element is set
     repaint();
+  }
+
+  public void transferPropertiesTo(ArrayRenderer newArrayRenderer) {
+    // which operations to display
+    newArrayRenderer.setShowSwaps(showSwaps);
+    newArrayRenderer.setShowComparisons(showComparisons);
+    newArrayRenderer.setShowGets(showGets);
+    newArrayRenderer.setShowSets(showSets);
+
+    // panel size
+    newArrayRenderer.setPanelSize(panelSize);
+
+    // tracked array
+    newArrayRenderer.setTrackedArray(trackedArray);
+
   }
 
   public abstract void paintComponent(Graphics g);

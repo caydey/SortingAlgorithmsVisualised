@@ -10,6 +10,9 @@ import com.caydey.sortingvisualised.array.ArrayOrder;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.algorithms.QuickSort;
 
+import com.caydey.sortingvisualised.gui.arraypanel.renderer.ArrayRenderer;
+import com.caydey.sortingvisualised.gui.arraypanel.renderer.BarRenderer;
+
 import com.caydey.sortingvisualised.gui.arraypanel.ArrayPanel;
 
 import com.caydey.sortingvisualised.gui.controlpanel.ControlPanel;
@@ -48,7 +51,6 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     ImageIcon icon = new ImageIcon(getClass().getResource("/icon.png"));
     setIconImage(icon.getImage());
 
-
     // layout
     setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
@@ -65,11 +67,11 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     c.gridx = 0; c.gridy = 1;
     c.weightx = 1.0; c.weighty = 1.0;
     c.fill = GridBagConstraints.BOTH;
-    arrayPanel = new ArrayPanel();
+    ArrayRenderer arrayRenderer = new BarRenderer(); // initialize ArrayRenderer as BarRenderer by default
+    arrayPanel = new ArrayPanel(arrayRenderer);
     arrayPanel.setShowComparisons(true);  // show comparisons (default)
     arrayPanel.setPanelSize(512); // 512x512px
     add(arrayPanel, c);
-
 
     // control panel (start, stop ... sorting-algorithm)
     c.gridx = 0; c.gridy = 2;
@@ -79,7 +81,6 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     controlPanel.setControlPanelListener(this); // pass ControlPanelListener
     add(controlPanel, c);
 
-
     // initialize TrackedArray as randomized of 500 elements (default)
     arraySize = 512;
     arrayOrder = ArrayOrder.RANDOMIZED;
@@ -88,12 +89,12 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     trackedArray = new TrackedArray(arraySize, arrayOrder);
     arrayPanel.setTrackedArray(trackedArray);
 
-    // initialize SortingAlgorithm as QuickSort
+    // initialize SortingAlgorithm as QuickSort by default
     sortingAlgorithm = new QuickSort();
+
 
     isSorting = false; // true when array is being sorted
     isArraySorted = false; // true when array has had sorting algorithm applied to it
-
 
     // window size
     setSize(512+PADDING_X, 512+PADDING_Y);
@@ -204,5 +205,9 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
         arrayPanel.setShowSets(shown);
         break;
     }
+  }
+  @Override
+  public void setArrayRendererAction(ArrayRenderer renderer) {
+    arrayPanel.setArrayRenderer(renderer);
   }
 }

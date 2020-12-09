@@ -9,15 +9,20 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 
 import com.caydey.sortingvisualised.gui.arraypanel.renderer.*;
 
-public class ArrayPanel extends JPanel {
-  ArrayRenderer renderer;
+import com.caydey.sortingvisualised.gui.WindowFrame;
 
-  public ArrayPanel() {
+public class ArrayPanel extends JPanel {
+  private ArrayRenderer renderer;
+
+  public ArrayPanel(ArrayRenderer renderer) {
     // layout
     setLayout(new BorderLayout());
+    this.renderer = renderer;
 
-    renderer = new RainbowBarRenderer();
-    // renderer = new BarRenderer();
+    // renderer = new ColorWheelRenderer();
+    // renderer = new RainbowBarRenderer();
+    // renderer = new SpectrumRenderer();
+    // renderer = new ColorGridRenderer();
     add(renderer, BorderLayout.CENTER); // fill
   }
 
@@ -26,12 +31,26 @@ public class ArrayPanel extends JPanel {
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {
-    trackedArray.setOperationListener(renderer);  // so trackedarray can comunicate to this what is being compared with what etc
     renderer.setTrackedArray(trackedArray);
+    repaint();
   }
   public void setPanelSize(int panelSize) {
     renderer.setPanelSize(panelSize); // update size for renderer
     setSize(panelSize, panelSize);  // update size of JPanel
+  }
+
+  public void setArrayRenderer(ArrayRenderer newRenderer) {
+    remove(renderer); // remove current renderer
+
+    // add new renderer
+    add(newRenderer, BorderLayout.CENTER);
+
+    // transfer field values of current renderer to new renderer (if swaps are shown, size, array details, ...)
+    renderer.transferPropertiesTo(newRenderer);
+
+    validate(); // update panel
+
+    renderer = newRenderer; // set new renderer to current
   }
 
   public void setShowSwaps(boolean showSwaps) {
