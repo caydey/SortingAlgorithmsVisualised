@@ -31,7 +31,7 @@ public enum Sorts {
 
   public static Sorts getSortFromName(String name) {
     for (Sorts sort : Sorts.values()) {
-      if (sort.getName().equals(name)) {
+      if (sort.name.equals(name)) {
         return sort;
       }
     }

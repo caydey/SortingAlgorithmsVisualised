@@ -8,31 +8,12 @@ import com.caydey.sortingvisualised.algorithms.Sorts;
 import com.caydey.sortingvisualised.algorithms.SortingAlgorithm;
 import com.caydey.sortingvisualised.array.ArrayOrder;
 
+import com.caydey.sortingvisualised.gui.arraypanel.renderer.Renderers;
+import com.caydey.sortingvisualised.gui.arraypanel.renderer.ArrayRenderer;
 
 import com.caydey.sortingvisualised.gui.combobox.*;
 
 public class ToolbarPanel extends JPanel {
-  private ControlComboBox delayComboBox;
-  private final String delayOptionTitle = "Delay";
-  private final int delayDefaultOption = 3;
-  private final String[] delayOptions = {
-    "1ms",
-    "2ms",
-    "5ms",
-    "10ms",
-    "20ms",
-    "100ms",
-    "500ms"
-  };
-  ControlComboCheckBox shownComboCheckBox;
-  private final String shownOptionTitle = "Shown";
-  private final int shownDefaultOption = 1;
-  private final String[] shownOptions = new String[] {
-    "Swaps",
-    "Comparisons",
-    "Gets",
-    "Sets"
-  };
   private ControlComboBox orderComboBox;
   private final String orderOptionTitle = "Order";
   private final int orderDefaultOption = 0;
@@ -55,8 +36,34 @@ public class ToolbarPanel extends JPanel {
     "2048",
     "4096"
   };
+  private ControlComboBox delayComboBox;
+  private final String delayOptionTitle = "Delay";
+  private final int delayDefaultOption = 3;
+  private final String[] delayOptions = {
+    "1ms",
+    "2ms",
+    "5ms",
+    "10ms",
+    "20ms",
+    "100ms",
+    "500ms"
+  };
+  private ControlComboCheckBox shownComboCheckBox;
+  private final String shownOptionTitle = "Shown";
+  private final int shownDefaultOption = 1;
+  private final String[] shownOptions = {
+    "Swaps",
+    "Comparisons",
+    "Gets",
+    "Sets"
+  };
+  private ControlComboBox visualisationComboBox;
+  private final String visualisationOptionTitle = "Visualisation";
+  private final int visualisationDefaultOption = 1;
+  private final String[] visualisationOptions = Renderers.getList();
 
-  private final static Color COLOR_BACKGROUND = new Color(24,24,24);
+
+  private final static Color COLOR_BACKGROUND = new Color(24,24,24);  // dark dark grey
 
   // Listener
   private ToolbarPanelListener toolbarPanelListener;
@@ -141,7 +148,22 @@ public class ToolbarPanel extends JPanel {
     });
     add(shownComboCheckBox, c);
 
+    // Visualisation
     c.gridx=4;
+    visualisationComboBox = new ControlComboBox(visualisationOptionTitle, visualisationOptions, false);
+    visualisationComboBox.setSelectedItem(visualisationDefaultOption);
+    visualisationComboBox.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String rendererName = (String)((ControlComboBox)e.getSource()).getSelectedItem();
+        ArrayRenderer arrayRenderer = Renderers.getRendererFromName(rendererName).getRendererObject();
+        toolbarPanelListener.setArrayRendererAction(arrayRenderer);
+      }
+    });
+    add(visualisationComboBox, c);
+
+    // force all previous items to the left
+    c.gridx=5;
     c.weightx=1.0;
     JLabel paddLabel = new JLabel();
     add(paddLabel,c);
