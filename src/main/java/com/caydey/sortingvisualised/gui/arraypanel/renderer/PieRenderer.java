@@ -7,11 +7,12 @@ import java.awt.image.*;
 import java.awt.geom.Arc2D;
 
 public class PieRenderer extends ArrayRenderer {
+  private int imgSize;
   @Override
   public void initializeGraphics() {
-    img = new BufferedImage(panelSize, panelSize, BufferedImage.TYPE_INT_RGB);
+    imgSize = (panelSize < arrayLength) ? arrayLength : panelSize;  // best resolution
+    img = new BufferedImage(imgSize, imgSize, BufferedImage.TYPE_INT_RGB);
     imgGraphics = img.createGraphics();  // convert to Graphics2D object
-    imgSize = panelSize;
   }
 
   @Override
@@ -23,7 +24,7 @@ public class PieRenderer extends ArrayRenderer {
 
       // background
       imgGraphics.setColor(COLOR_BACKGROUND);
-      imgGraphics.fillRect(0,0, arrayLength, arrayLength);
+      imgGraphics.fillRect(0,0, imgSize, imgSize);
 
       // bars
       int[] array = trackedArray.getArray();
@@ -40,5 +41,5 @@ public class PieRenderer extends ArrayRenderer {
     }
   }
 
-  
+
 }
