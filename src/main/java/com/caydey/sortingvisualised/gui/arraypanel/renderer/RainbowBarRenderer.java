@@ -25,7 +25,7 @@ public class RainbowBarRenderer extends ArrayRenderer {
           imgGraphics.setColor(getRainbowColor(array[i]));
         }
         // draw array element
-        imgGraphics.fillRect(i,arrayLength-array[i]-1, 1,array[i]+1);
+        imgGraphics.drawLine(i,arrayLength-array[i]-1, i,arrayLength);
       }
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);

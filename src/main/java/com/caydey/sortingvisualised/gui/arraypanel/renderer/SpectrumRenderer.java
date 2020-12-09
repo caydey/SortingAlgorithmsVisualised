@@ -25,7 +25,7 @@ public class SpectrumRenderer extends ArrayRenderer {
           imgGraphics.setColor(getRainbowColor(array[i]));
         }
         // draw array element
-        imgGraphics.fillRect(i,0, 1, arrayLength);
+        imgGraphics.drawLine(i,0, i,arrayLength);
       }
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
