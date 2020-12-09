@@ -16,15 +16,11 @@ public class RainbowBarRenderer extends ArrayRenderer {
       // bars
       int[] array = trackedArray.getArray();
       for (int i=0; i<array.length; i++) {
-        // color
-        if (i == lastCompared[0] || i == lastCompared[1]) {
-          imgGraphics.setColor(COLOR_COMPARE);
-        } else if (i == lastSwaped[0] || i == lastSwaped[1]) {
-          imgGraphics.setColor(COLOR_SWAP);
-        } else if (i == lastSet) {
-          imgGraphics.setColor(COLOR_SET);
-        } else if (i == lastGet) {
-          imgGraphics.setColor(COLOR_GET);
+        // any comparisons color is white since rainbow
+        if (i == lastCompared[0] || i == lastCompared[1]
+        || i == lastSwaped[0] || i == lastSwaped[1]
+        || i == lastSet || i == lastGet) {
+          imgGraphics.setColor(Color.WHITE);
         } else {
           imgGraphics.setColor(getRainbowColor(array[i]));
         }

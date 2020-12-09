@@ -16,9 +16,14 @@ public class SpectrumRenderer extends ArrayRenderer {
       // bars
       int[] array = trackedArray.getArray();
       for (int i=0; i<array.length; i++) {
-        // color
-        imgGraphics.setColor(getRainbowColor(array[i]));
-
+        // any comparisons color is white since rainbow
+        if (i == lastCompared[0] || i == lastCompared[1]
+        || i == lastSwaped[0] || i == lastSwaped[1]
+        || i == lastSet || i == lastGet) {
+          imgGraphics.setColor(Color.WHITE);
+        } else {
+          imgGraphics.setColor(getRainbowColor(array[i]));
+        }
         // draw array element
         imgGraphics.fillRect(i,0, 1, arrayLength);
       }
