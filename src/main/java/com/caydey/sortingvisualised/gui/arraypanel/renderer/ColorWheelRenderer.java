@@ -17,7 +17,7 @@ public class ColorWheelRenderer extends ArrayRenderer {
 
   @Override
   public void paintComponent(Graphics g) {
-    double anglePerc = 360.0 / arrayLength;
+    double angleUnit = 360.0 / arrayLength;
 
     if (trackedArray != null) { // if array is defined
       Graphics2D g2d = (Graphics2D)g;
@@ -39,7 +39,7 @@ public class ColorWheelRenderer extends ArrayRenderer {
         }
 
         // draw array element
-        Arc2D arc = new Arc2D.Double(0, 0, imgSize, imgSize, i*anglePerc, anglePerc, Arc2D.PIE);
+        Arc2D arc = new Arc2D.Double(0, 0, imgSize, imgSize, i*angleUnit, angleUnit, Arc2D.PIE);
         imgGraphics.fill(arc);
       }
       // streach image to fit on window
