@@ -11,8 +11,9 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
   protected TrackedArray trackedArray;
   protected int arrayLength;
   protected int panelSize;
+  protected int imgSize;
 
-  // colors
+  // Colors
   protected static final Color COLOR_BACKGROUND = Color.BLACK;
   protected static final Color COLOR_ELEMENT = Color.WHITE;
   protected static final Color COLOR_SORTED = Color.GREEN;
@@ -33,7 +34,7 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
   protected boolean showGets;
   protected boolean showSets;
 
-  // graphics
+  // Graphics
   protected BufferedImage img;
   protected Graphics2D imgGraphics;
 
@@ -57,6 +58,17 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     showSets = false;
   }
 
+  protected void initializeGraphics() {
+    img = new BufferedImage(trackedArray.length, trackedArray.length, BufferedImage.TYPE_INT_RGB);
+    imgGraphics = img.createGraphics();  // convert to Graphics2D object
+  }
+
+  protected Color getRainbowColor(int val) {
+    float percVal = (float)(val/(arrayLength*1.0));
+    Color color = Color.getHSBColor(percVal,1,1);
+    return color;
+  }
+
   public void setPanelSize(int panelSize) {
     this.panelSize = panelSize;
   }
@@ -69,8 +81,7 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     resetLastOperations();
 
     // Initialize Graphics - create square image, arrayLength x arrayLength
-    img = new BufferedImage(trackedArray.length, trackedArray.length, BufferedImage.TYPE_INT_RGB);
-    imgGraphics = img.createGraphics();  // convert to Graphics2D object
+    initializeGraphics();
 
     repaint();
   }

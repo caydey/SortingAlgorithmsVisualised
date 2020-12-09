@@ -35,10 +35,4 @@ public class RainbowBarRenderer extends ArrayRenderer {
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
     }
   }
-
-  private Color getRainbowColor(int val) {
-    float percVal = (float)(val/(arrayLength*1.0));
-    Color color = Color.getHSBColor(percVal,1,1);
-    return color;
-  }
 }
