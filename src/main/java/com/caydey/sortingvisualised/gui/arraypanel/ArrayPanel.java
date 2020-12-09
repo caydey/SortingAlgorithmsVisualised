@@ -19,10 +19,6 @@ public class ArrayPanel extends JPanel {
     setLayout(new BorderLayout());
     this.renderer = renderer;
 
-    // renderer = new ColorWheelRenderer();
-    // renderer = new RainbowBarRenderer();
-    // renderer = new SpectrumRenderer();
-    // renderer = new ColorGridRenderer();
     add(renderer, BorderLayout.CENTER); // fill
   }
 
@@ -40,9 +36,9 @@ public class ArrayPanel extends JPanel {
   }
 
   public void setArrayRenderer(ArrayRenderer newRenderer) {
-    remove(renderer); // remove current renderer
+    remove(renderer); // remove current renderer from panel
 
-    // add new renderer
+    // add new renderer to panel
     add(newRenderer, BorderLayout.CENTER);
 
     // transfer field values of current renderer to new renderer (if swaps are shown, size, array details, ...)
