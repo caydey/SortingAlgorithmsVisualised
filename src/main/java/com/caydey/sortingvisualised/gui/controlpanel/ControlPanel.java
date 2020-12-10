@@ -21,7 +21,7 @@ public class ControlPanel extends JPanel {
   private final String sortsDefaultOption = Sorts.QUICK.getName();
   private final String[] sortsOptions = Sorts.getList();
 
-  private final static Color COLOR_BACKGROUND = new Color(24,24,24);
+  private final static Color COLOR_BACKGROUND = Color.BLACK;
 
   // Listener
   private ControlPanelListener controlPanelListener;

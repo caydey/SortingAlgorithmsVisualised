@@ -4,6 +4,7 @@ package com.caydey.sortingvisualised.gui.arraypanel.renderer;
 public enum Renderers {
   BARS("Bars"),
   COLORWHEEL("Color Wheel"),
+  IMAGE("Custom Image"),
   RAINBOWBARS("Rainbow Bars"),
   SPECTRUM("Spectrum");
 
@@ -45,6 +46,8 @@ public enum Renderers {
         return new RainbowBarRenderer();
       case SPECTRUM:
         return new SpectrumRenderer();
+      case IMAGE:
+        return new ImageRenderer();
       default:
         return null;
     }

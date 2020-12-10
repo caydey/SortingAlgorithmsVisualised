@@ -63,7 +63,7 @@ public class ToolbarPanel extends JPanel {
   private final String[] visualisationOptions = Renderers.getList();
 
 
-  private final static Color COLOR_BACKGROUND = new Color(24,24,24);  // dark dark grey
+  private final static Color COLOR_BACKGROUND = Color.BLACK;
 
   // Listener
   private ToolbarPanelListener toolbarPanelListener;
