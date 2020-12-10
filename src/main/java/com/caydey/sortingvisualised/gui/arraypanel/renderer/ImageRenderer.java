@@ -70,7 +70,7 @@ public class ImageRenderer extends ArrayRenderer {
         invalidImg = (readImg == null);
       }
 
-      if (invalidImg) { // invalid image, go to default image
+      if (invalidImg) { // invalid image, set to default image
         readImg = ImageIO.read(getClass().getResource("/icon.png"));
       }
     } catch(IOException e) { /* */ }
