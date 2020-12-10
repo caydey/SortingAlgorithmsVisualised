@@ -73,7 +73,7 @@ public class ImageRenderer extends ArrayRenderer {
       if (invalidImg) { // invalid image, go to default image
         readImg = ImageIO.read(getClass().getResource("/icon.png"));
       }
-    } catch(IOException e) { \* *\ }
+    } catch(IOException e) { /* */ }
 
     // scale image
     Image tmp = readImg.getScaledInstance(imgSize, imgSize, Image.SCALE_SMOOTH);
