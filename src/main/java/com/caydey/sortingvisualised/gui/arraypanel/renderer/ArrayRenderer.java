@@ -10,6 +10,8 @@ import com.caydey.sortingvisualised.gui.arraypanel.ArrayOperationListener;
 public abstract class ArrayRenderer extends JPanel implements ArrayOperationListener {
   protected TrackedArray trackedArray;
   protected int arrayLength;
+  protected boolean isArraySorted;
+
   protected int panelSize;
 
   // Colors
@@ -76,6 +78,8 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     this.trackedArray = trackedArray;
     this.arrayLength = trackedArray.length;
 
+    isArraySorted = false;
+
     trackedArray.setOperationListener(this); // so trackedarray can comunicate to this what is being compared with what etc
 
     // set last operations to null (-1)
@@ -85,6 +89,11 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     initializeGraphics();
 
     repaint();
+  }
+
+  public void sortedAnimation() {
+    resetLastOperations();
+    isArraySorted = true;
   }
 
   public void setShowSwaps(boolean showSwaps) {
