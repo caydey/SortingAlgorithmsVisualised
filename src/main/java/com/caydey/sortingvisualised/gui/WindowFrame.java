@@ -49,13 +49,15 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     setIconImage(icon.getImage());
 
 
-    // layout
     JPanel containerPanel = new JPanel();
+      containerPanel.setBackground(Color.BLACK);
+      containerPanel.setPreferredSize(new Dimension(512, 552)); // 512, 512+20(toolbar)+20(controlPanel)
+      // layout
       containerPanel.setLayout(new GridBagLayout());
-      containerPanel.setPreferredSize(new Dimension(512, 552)); // 512, 512+20+20 (toolbar & controlPanel)
       GridBagConstraints c = new GridBagConstraints();
+
       // toolbar
-      c.gridx = 0; c.gridy = 0;
+      c.gridy = 0;
       c.weightx = 1.0; c.weighty = 0.0;
       c.fill = GridBagConstraints.HORIZONTAL;
       toolbarPanel = new ToolbarPanel();
@@ -63,17 +65,16 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
       containerPanel.add(toolbarPanel, c);
 
       // canvas
-      c.gridx = 0; c.gridy = 1;
+      c.gridy = 1;
       c.weightx = 1.0; c.weighty = 1.0;
       c.fill = GridBagConstraints.BOTH;
       ArrayRenderer arrayRenderer = new BarRenderer(); // initialize ArrayRenderer as BarRenderer by default
       arrayPanel = new ArrayPanel(arrayRenderer);
       arrayPanel.setShowComparisons(true);  // show comparisons (default)
-      // arrayPanel.setPanelSize(512); // set initial panel size to 512x512px
       containerPanel.add(arrayPanel, c);
 
       // control panel (start, stop ... sorting-algorithm)
-      c.gridx = 0; c.gridy = 2;
+      c.gridy = 2;
       c.weightx = 1.0; c.weighty = 0.0;
       c.fill = GridBagConstraints.HORIZONTAL;
       controlPanel = new ControlPanel();
@@ -104,7 +105,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
-        setMinimumSize(new Dimension(getWidth(), getHeight())); // minimum size as current window size
+        setMinimumSize(getPreferredSize()); // minimum size as current window size
       }
     });
     setLocationRelativeTo(null);  // center window
