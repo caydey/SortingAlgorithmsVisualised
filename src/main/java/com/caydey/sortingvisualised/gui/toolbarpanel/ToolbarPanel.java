@@ -150,7 +150,7 @@ public class ToolbarPanel extends JPanel {
 
     // Visualisation
     c.gridx=4;
-    visualisationComboBox = new ControlComboBox(visualisationOptionTitle, visualisationOptions, false);
+    visualisationComboBox = new ControlComboBox(visualisationOptionTitle, visualisationOptions, true);
     visualisationComboBox.setSelectedItem(visualisationDefaultOption);
     visualisationComboBox.addActionListener(new ActionListener() {
       @Override
