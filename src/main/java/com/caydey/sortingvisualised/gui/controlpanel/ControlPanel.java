@@ -58,6 +58,7 @@ public class ControlPanel extends JPanel {
       // Sorts
       sortsComboBox = new ControlComboBox(sortsOptionTitle, sortsOptions, true); // Sorts is an enum listing all sorting algorithms
       sortsComboBox.setSelectedItem(sortsDefaultOption); // Select "Quick Sort" by default
+      sortsComboBox.setHeight(22); // set height to 22px
       sortsComboBox.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

@@ -23,10 +23,8 @@ public class ControlComboBox extends JComboBox<String> {
     // Labels
     addLabels();
 
-    // set height to 20px
-    Dimension dimension = getPreferredSize();
-    dimension.height = 20;
-    setPreferredSize(dimension);
+    // set height to 20px by default
+    setHeight(20);
 
     // look
     setMaximumRowCount(12);  // dropdown size
@@ -34,7 +32,12 @@ public class ControlComboBox extends JComboBox<String> {
     setForeground(Color.BLACK);
     setBackground(new Color(224,255,255)); // Light Cyan
     setFocusable(false);
+  }
 
+  public void setHeight(int height) {
+    Dimension dimension = getPreferredSize(); // get current size
+    dimension.height = height;  // change height
+    setPreferredSize(dimension);  // apply change
   }
 
   private void addLabels() {

@@ -18,7 +18,7 @@ public class ControlComboCheckBox extends JComboBox<JCheckBox> {
     titleLabel = new JLabel(title);
 
     // height & width
-    setPreferredSize(new Dimension(120,20));
+    setPreferredSize(new Dimension(140,20));
 
     // CheckBoxes
     setCheckBoxes();

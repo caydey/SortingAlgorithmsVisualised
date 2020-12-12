@@ -51,7 +51,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
 
     JPanel containerPanel = new JPanel();
       containerPanel.setBackground(Color.BLACK);
-      containerPanel.setPreferredSize(new Dimension(512, 552)); // 512, 512+20(toolbar)+20(controlPanel)
+      containerPanel.setPreferredSize(new Dimension(512, 554)); // 512, 512+20(toolbar)+22(controlPanel)
       // layout
       containerPanel.setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
