@@ -22,6 +22,9 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
   protected static final Color COLOR_SWAP = Color.RED;
   protected static final Color COLOR_GET = Color.CYAN;
   protected static final Color COLOR_SET = Color.CYAN;
+  private static final Color COLOR_TEXT = Color.WHITE;
+
+  private static final int TEXT_SPACING = 12;
 
   // Index of elements that had an operation done on it
   protected int[] lastCompared =  new int[2];
@@ -42,6 +45,21 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
   public ArrayRenderer() {
     // set shown operations to false
     resetShownOperations();
+  }
+
+  protected void updateDisplayedOperations(Graphics2D g2d) {
+    // get operations from TrackedArray
+    int comparisons = trackedArray.getComparisons();
+    int swaps = trackedArray.getSwaps();
+    int reads = trackedArray.getReads();
+    int writes = trackedArray.getWrites();
+
+    // display operations count in top left corner
+    g2d.setColor(COLOR_TEXT);
+    g2d.drawString("Comparisons: "+comparisons, 0,TEXT_SPACING*1);
+    g2d.drawString("Swaps: "+swaps, 0,TEXT_SPACING*2);
+    g2d.drawString("Reads: "+reads, 0,TEXT_SPACING*3);
+    g2d.drawString("Writes: "+writes, 0,TEXT_SPACING*4);
   }
 
   private void resetLastOperations() {

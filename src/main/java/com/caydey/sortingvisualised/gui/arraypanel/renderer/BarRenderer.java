@@ -32,6 +32,8 @@ public class BarRenderer extends ArrayRenderer {
       }
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
+      // display operations count
+      updateDisplayedOperations(g2d);
     }
   }
 }

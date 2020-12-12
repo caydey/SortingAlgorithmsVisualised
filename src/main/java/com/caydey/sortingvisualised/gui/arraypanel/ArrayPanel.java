@@ -27,7 +27,7 @@ public class ArrayPanel extends JPanel {
         int width = getWidth();
         int height = getHeight();
         int min = (width < height) ? width : height;
-        
+
         setPanelSize(min); // 512x512px
       }
     });
