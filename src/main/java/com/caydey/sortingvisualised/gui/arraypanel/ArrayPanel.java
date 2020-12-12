@@ -20,6 +20,17 @@ public class ArrayPanel extends JPanel {
     this.renderer = renderer;
 
     add(renderer, BorderLayout.CENTER); // fill
+
+    // resize panel as window is resized
+    addComponentListener(new ComponentAdapter() {
+      public void componentResized(ComponentEvent componentEvent) {
+        int width = getWidth();
+        int height = getHeight();
+        int min = (width < height) ? width : height;
+        
+        setPanelSize(min); // 512x512px
+      }
+    });
   }
 
   public void setSorted() {
@@ -32,7 +43,7 @@ public class ArrayPanel extends JPanel {
   }
   public void setPanelSize(int panelSize) {
     renderer.setPanelSize(panelSize); // update size for renderer
-    setSize(panelSize, panelSize);  // update size of JPanel
+    setPreferredSize(new Dimension(panelSize, panelSize));  // update size of JPanel
   }
 
   public void setArrayRenderer(ArrayRenderer newRenderer) {

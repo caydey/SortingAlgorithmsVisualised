@@ -28,9 +28,6 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
   private ArrayPanel arrayPanel;
   private ControlPanel controlPanel;
 
-  private static final int PADDING_X = 4;  // 4 window manager border
-  private static final int PADDING_Y = 70; // 30 titlebar, 20 toolbar, 20 controlpanel
-
   private TrackedArray trackedArray;
   private SortingAlgorithm sortingAlgorithm;
   private int arraySize;
@@ -51,35 +48,38 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
     ImageIcon icon = new ImageIcon(getClass().getResource("/icon.png"));
     setIconImage(icon.getImage());
 
+
     // layout
-    setLayout(new GridBagLayout());
-    GridBagConstraints c = new GridBagConstraints();
+    JPanel containerPanel = new JPanel();
+      containerPanel.setLayout(new GridBagLayout());
+      containerPanel.setPreferredSize(new Dimension(512, 552)); // 512, 512+20+20 (toolbar & controlPanel)
+      GridBagConstraints c = new GridBagConstraints();
+      // toolbar
+      c.gridx = 0; c.gridy = 0;
+      c.weightx = 1.0; c.weighty = 0.0;
+      c.fill = GridBagConstraints.HORIZONTAL;
+      toolbarPanel = new ToolbarPanel();
+      toolbarPanel.setToolbarPanelListener(this); // pass ToolbarPanelListener
+      containerPanel.add(toolbarPanel, c);
 
-    // toolbar
-    c.gridx = 0; c.gridy = 0;
-    c.weightx = 1.0; c.weighty = 0.0;
-    c.fill = GridBagConstraints.HORIZONTAL;
-    toolbarPanel = new ToolbarPanel();
-    toolbarPanel.setToolbarPanelListener(this); // pass ToolbarPanelListener
-    add(toolbarPanel, c);
+      // canvas
+      c.gridx = 0; c.gridy = 1;
+      c.weightx = 1.0; c.weighty = 1.0;
+      c.fill = GridBagConstraints.BOTH;
+      ArrayRenderer arrayRenderer = new BarRenderer(); // initialize ArrayRenderer as BarRenderer by default
+      arrayPanel = new ArrayPanel(arrayRenderer);
+      arrayPanel.setShowComparisons(true);  // show comparisons (default)
+      // arrayPanel.setPanelSize(512); // set initial panel size to 512x512px
+      containerPanel.add(arrayPanel, c);
 
-    // canvas
-    c.gridx = 0; c.gridy = 1;
-    c.weightx = 1.0; c.weighty = 1.0;
-    c.fill = GridBagConstraints.BOTH;
-    ArrayRenderer arrayRenderer = new BarRenderer(); // initialize ArrayRenderer as BarRenderer by default
-    arrayPanel = new ArrayPanel(arrayRenderer);
-    arrayPanel.setShowComparisons(true);  // show comparisons (default)
-    arrayPanel.setPanelSize(512); // 512x512px
-    add(arrayPanel, c);
-
-    // control panel (start, stop ... sorting-algorithm)
-    c.gridx = 0; c.gridy = 2;
-    c.weightx = 1.0; c.weighty = 0.0;
-    c.fill = GridBagConstraints.HORIZONTAL;
-    controlPanel = new ControlPanel();
-    controlPanel.setControlPanelListener(this); // pass ControlPanelListener
-    add(controlPanel, c);
+      // control panel (start, stop ... sorting-algorithm)
+      c.gridx = 0; c.gridy = 2;
+      c.weightx = 1.0; c.weighty = 0.0;
+      c.fill = GridBagConstraints.HORIZONTAL;
+      controlPanel = new ControlPanel();
+      controlPanel.setControlPanelListener(this); // pass ControlPanelListener
+      containerPanel.add(controlPanel, c);
+    add(containerPanel);
 
     // initialize TrackedArray as randomized of 500 elements (default)
     arraySize = 512;
@@ -91,33 +91,22 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
 
     // initialize SortingAlgorithm as QuickSort by default
     sortingAlgorithm = new QuickSort();
-
-
     isSorting = false; // true when array is being sorted
     isArraySorted = false; // true when array has had sorting algorithm applied to it
-
-    // window size
-    setSize(512+PADDING_X, 512+PADDING_Y);
-    setMinimumSize(new Dimension(512+PADDING_X, 512+PADDING_Y));
-    addComponentListener(new ComponentAdapter() {
-      public void componentResized(ComponentEvent componentEvent) {
-        int width = getWidth() - PADDING_X;
-        int height = getHeight() - PADDING_Y;
-
-        int min = (width < height) ? width : height;
-        int newPanelSize = min;
-        setSize(newPanelSize+PADDING_X, newPanelSize+PADDING_Y);  // snap window size
-
-        arrayPanel.setPanelSize(newPanelSize);
-        // System.out.println(newPanelSize);
-      }
-    });
 
     // ToolTip
     ToolTipManager.sharedInstance().setInitialDelay(100); // popup delay
     UIManager.put("ToolTip.foreground", Color.BLACK);
     UIManager.put("ToolTip.background", new Color(224,255,255)); // Light Cyan
 
+    pack(); // adjust window size to fit all components
+    // pack() method isnt instant so give delay before setting minimum size to the current window size
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        setMinimumSize(new Dimension(getWidth(), getHeight())); // minimum size as current window size
+      }
+    });
     setLocationRelativeTo(null);  // center window
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
