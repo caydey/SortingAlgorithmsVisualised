@@ -28,9 +28,14 @@ public class ArrayPanel extends JPanel {
         int height = getHeight();
         int min = (width < height) ? width : height;
 
-        setPanelSize(min); // 512x512px
+        setPanelSize(min);
       }
     });
+  }
+
+  private void setPanelSize(int panelSize) {
+    renderer.setPanelSize(panelSize); // update size for renderer
+    setPreferredSize(new Dimension(panelSize, panelSize));  // update size of JPanel
   }
 
   public void setSorted() {
@@ -40,10 +45,6 @@ public class ArrayPanel extends JPanel {
   public void setTrackedArray(TrackedArray trackedArray) {
     renderer.setTrackedArray(trackedArray);
     repaint();
-  }
-  public void setPanelSize(int panelSize) {
-    renderer.setPanelSize(panelSize); // update size for renderer
-    setPreferredSize(new Dimension(panelSize, panelSize));  // update size of JPanel
   }
 
   public void setArrayRenderer(ArrayRenderer newRenderer) {
