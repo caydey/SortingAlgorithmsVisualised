@@ -3,6 +3,7 @@ package com.caydey.sortingvisualised.gui.arraypanel.renderer;
 
 public enum Renderers {
   BARS("Bars"),
+  BUBBLES("Bubbles"),
   COLORWHEEL("Color Wheel"),
   IMAGE("Custom Image"),
   RAINBOWBARS("Rainbow Bars"),
@@ -40,6 +41,8 @@ public enum Renderers {
     switch (this) {
       case COLORWHEEL:
         return new ColorWheelRenderer();
+      case BUBBLES:
+        return new BubbleRenderer();
       case BARS:
         return new BarRenderer();
       case RAINBOWBARS:
