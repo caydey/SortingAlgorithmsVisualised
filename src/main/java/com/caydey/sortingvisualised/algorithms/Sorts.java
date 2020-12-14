@@ -9,6 +9,7 @@ public enum Sorts {
   GNOME("Gnome Sort"),
   HEAP("Heap Sort"),
   INSERTION("Insertion Sort"),
+  INTRO("Intro Sort"),
   MERGE("Merge Sort"),
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort"),
@@ -60,6 +61,8 @@ public enum Sorts {
         return new HeapSort();
       case INSERTION:
         return new InsertionSort();
+      case INTRO:
+        return new IntroSort();
       case MERGE:
         return new MergeSort();
       case PANCAKE:
