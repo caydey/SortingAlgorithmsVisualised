@@ -13,7 +13,8 @@ public enum Sorts {
   MERGE("Merge Sort"),
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort"),
-  SELECTION("Selection Sort");
+  SELECTION("Selection Sort"),
+  TIM("Tim Sort");
 
   private String name;
 
@@ -71,6 +72,8 @@ public enum Sorts {
         return new QuickSort();
       case SELECTION:
         return new SelectionSort();
+      case TIM:
+        return new TimSort();
       default:
         return null;
     }
