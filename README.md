@@ -23,6 +23,7 @@
 - Insertion Sort
 - Intro Sort
 - Merge Sort
+- Odd-even Sort
 - Pancake Sort
 - Quick Sort
 - Selection Sort

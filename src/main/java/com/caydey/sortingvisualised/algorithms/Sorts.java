@@ -11,6 +11,7 @@ public enum Sorts {
   INSERTION("Insertion Sort"),
   INTRO("Intro Sort"),
   MERGE("Merge Sort"),
+  ODDEVEN("Odd-even Sort"),
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort"),
   SELECTION("Selection Sort"),
@@ -66,6 +67,8 @@ public enum Sorts {
         return new IntroSort();
       case MERGE:
         return new MergeSort();
+      case ODDEVEN:
+        return new OddevenSort();
       case PANCAKE:
         return new PancakeSort();
       case QUICK:
