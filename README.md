@@ -21,10 +21,12 @@
 - Gnome Sort
 - Heap Sort
 - Insertion Sort
+- Intro Sort
 - Merge Sort
 - Pancake Sort
 - Quick Sort
 - Selection Sort
+- Tim Sort
 
 ## Build
 ### Maven
