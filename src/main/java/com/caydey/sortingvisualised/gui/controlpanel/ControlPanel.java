@@ -20,6 +20,7 @@ public class ControlPanel extends JPanel {
   private final String sortsOptionTitle = "Sort";
   private final String sortsDefaultOption = Sorts.QUICK.getName();
   private final String[] sortsOptions = Sorts.getList();
+  private String sortsLastOption = sortsDefaultOption;
 
   private final static Color COLOR_BACKGROUND = Color.BLACK;
 
@@ -63,8 +64,11 @@ public class ControlPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
           String sortName = (String)((ControlComboBox)e.getSource()).getSelectedItem(); // "Quick Sort", "Cocktail Sort" etc...
-          SortingAlgorithm algorithm = Sorts.getSortFromName(sortName).getSortObject(); // get enum of sorting algorithm and then gets sort object from enum
-          controlPanelListener.setSortingAlgorithmAction(algorithm); // call to action listener inside WindowFrame
+          if (!sortName.equals(sortsLastOption)) {  // different option chosen
+            SortingAlgorithm algorithm = Sorts.getSortFromName(sortName).getSortObject(); // get enum of sorting algorithm and then gets sort object from enum
+            controlPanelListener.setSortingAlgorithmAction(algorithm); // call to action listener inside WindowFrame
+            sortsLastOption = sortName;
+          }
         }
       });
       rightPanel.add(sortsComboBox);

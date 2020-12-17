@@ -39,6 +39,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
 
   private boolean isSorting;
   private boolean isArraySorted;
+  private boolean algorithmChange;
 
   public WindowFrame() {
     // title
@@ -92,8 +93,10 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
 
     // initialize SortingAlgorithm as QuickSort by default
     sortingAlgorithm = new QuickSort();
+
     isSorting = false; // true when array is being sorted
     isArraySorted = false; // true when array has had sorting algorithm applied to it
+    algorithmChange = false;  // true when sorting algorithm has been changed
 
     // ToolTip
     ToolTipManager.sharedInstance().setInitialDelay(100); // popup delay
@@ -118,11 +121,16 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
   public void startAction() {
     // start sorting in thread so it can sleep and run
     // in parrallel without effecting program execution
-    if (!isSorting) { // dont sort an array thats currently being sorted
+    if (!isSorting || algorithmChange) { // dont sort an array thats currently being sorted unless algorithm has been changed
       if (isArraySorted) {  // if array has been sorted and user wants to sort it again, reshuffle array
         resetAction();
       }
+      if (algorithmChange && isSorting) { // if array is being sorted, used changed the algorithm and pressed play, reshuffle array
+        resetAction();
+      }
+
       isSorting = true; // Array is being sorted
+      algorithmChange = false;  // reset boolean var
       sortingRunnable = new SortArray(trackedArray, sortingAlgorithm);
       // Listener for when algorithm has sorted array
       sortingRunnable.setArraySortedListener(new ArraySortedListener() {
@@ -164,6 +172,7 @@ public class WindowFrame extends JFrame implements ControlPanelListener, Toolbar
   @Override
   public void setSortingAlgorithmAction(SortingAlgorithm sortingAlgorithm) {
     this.sortingAlgorithm = sortingAlgorithm;
+    algorithmChange = true;
   }
   @Override
   public void setArrayOrderAction(ArrayOrder order) {
