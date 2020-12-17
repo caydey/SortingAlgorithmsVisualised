@@ -4,6 +4,7 @@ public enum Sorts {
   BITONIC("Bitonic Sort"),
   BOGO("Bogo Sort"),
   BUBBLE("Bubble Sort"),
+  CIRCLE("Circle Sort"),
   COCKTAIL("Cocktail Sort"),
   COMB("Comb Sort"),
   GNOME("Gnome Sort"),
@@ -53,6 +54,8 @@ public enum Sorts {
         return new BogoSort();
       case BUBBLE:
         return new BubbleSort();
+      case CIRCLE:
+        return new CircleSort();
       case COCKTAIL:
         return new CocktailSort();
       case COMB:
