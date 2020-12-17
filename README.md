@@ -16,6 +16,7 @@
 - Bitonic Sort
 - Bogo Sort
 - Bubble Sort
+- Circle Sort
 - Cocktail Sort
 - Comb Sort
 - Gnome Sort
