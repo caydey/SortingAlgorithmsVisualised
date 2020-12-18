@@ -28,6 +28,7 @@
 - Pancake Sort
 - Quick Sort
 - Selection Sort
+- Shell Sort
 - Tim Sort
 
 ## Build
