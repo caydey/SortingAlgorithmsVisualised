@@ -11,9 +11,9 @@ public class InsertionSort implements SortingAlgorithm {
 
       array.logComparedIndexes(j,i);
       while (j>=0 && array.get(j) > key) {
-        array.logComparedIndexes(j,i);
         array.set(j+1, array.get(j));
         j--;
+        array.logComparedIndexes(j,i);
       }
       array.set(j+1, key);
     }
