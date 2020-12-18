@@ -16,6 +16,7 @@ public enum Sorts {
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort"),
   SELECTION("Selection Sort"),
+  SHELL("Shell Sort"),
   TIM("Tim Sort");
 
   private String name;
@@ -78,6 +79,8 @@ public enum Sorts {
         return new QuickSort();
       case SELECTION:
         return new SelectionSort();
+      case SHELL:
+        return new ShellSort();
       case TIM:
         return new TimSort();
       default:
