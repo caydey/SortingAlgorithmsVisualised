@@ -15,6 +15,7 @@ public enum Sorts {
   ODDEVEN("Odd-even Sort"),
   PANCAKE("Pancake Sort"),
   QUICK("Quick Sort"),
+  RADIX("Radix Sort"),
   SELECTION("Selection Sort"),
   SHELL("Shell Sort"),
   TIM("Tim Sort");
@@ -77,6 +78,8 @@ public enum Sorts {
         return new PancakeSort();
       case QUICK:
         return new QuickSort();
+      case RADIX:
+        return new RadixSort();
       case SELECTION:
         return new SelectionSort();
       case SHELL:

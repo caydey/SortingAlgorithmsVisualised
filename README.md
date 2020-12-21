@@ -27,6 +27,7 @@
 - Odd-even Sort
 - Pancake Sort
 - Quick Sort
+- Radix Sort
 - Selection Sort
 - Shell Sort
 - Tim Sort
