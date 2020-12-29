@@ -5,46 +5,40 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 public class HeapSort implements SortingAlgorithm {
   @Override
   public void sort(TrackedArray array) {
-    int length = array.length;
+    heapSort(array, 0, array.length);
+  }
 
-    // Build heap (rearrange array)
-    for (int i=(length/2)-1; i>=0; i--) {
-      heapify(array, length, i);
+  public static void heapSort(TrackedArray array, int low, int high) {
+    int length = high-low;
+    // building heap
+    for (int i = length/2 - 1; i >= 0; i--) {
+      heapify(array, length, low, i);
     }
-
-    // One by one extract an element from heap
-    for (int i=length-1; i>0; i--) {
-      // Move current root to end
-      array.swap(0, i);
-
-      // call max heapify on the reduced heap
-      heapify(array, i, 0);
+    // Extract elements from heap
+    for (int i=length-1; i>=0; i--) {
+      array.swap(low, low+i);
+      heapify(array, i, low, 0);
     }
   }
 
-  // To heapify a subtree rooted with node i which is
-  // an index in arr[]. n is size of heap
-  private void heapify(TrackedArray array, int length, int i) {
-    int largest = i; // Initialize largest as root
-    int left = (2*i)+1;
-    int right = (2*i)+2;
+  private static void heapify(TrackedArray array, int length, int low, int index) {
+    int largest = index;
+    int left = 2*index + 1;// left of binary tree
+    int right = 2*index + 2;// right of binary tree
 
-    // If left child is larger than root
-    if (left < length && array.compareIndexes(left, largest) > 0) { // left > largest
+    // set left to root-index if greater
+    if (left < length && array.compareIndexes(low+left, low+largest) > 0) {
       largest = left;
     }
-
-    // If right child is larger than largest so far
-    if (right < length && array.compareIndexes(right, largest) > 0) { // right > largest
+    // set right to root-index if greater
+    if (right < length && array.compareIndexes(low+right, low+largest) > 0) {
       largest = right;
     }
 
-    // If largest is not root
-    if (largest != i) {
-      array.swap(i, largest);
-
+    if (largest != index) {
+      array.swap(low+index, low+largest);
       // Recursively heapify the affected sub-tree
-      heapify(array, length, largest);
+      heapify(array, length, low, largest);
     }
   }
 }

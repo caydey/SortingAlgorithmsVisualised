@@ -5,7 +5,11 @@ import com.caydey.sortingvisualised.array.TrackedArray;
 public class InsertionSort implements SortingAlgorithm {
   @Override
   public void sort(TrackedArray array) {
-    for (int i=1; i<array.length; ++i) {
+    insertionSort(array, 0, array.length);
+  }
+
+  public static void insertionSort(TrackedArray array, int start, int end) {
+    for (int i=start+1; i<end; ++i) {
       int key = array.get(i);
       int j = i-1;
 
