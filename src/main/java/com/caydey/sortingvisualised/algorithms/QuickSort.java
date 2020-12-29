@@ -17,20 +17,20 @@ public class QuickSort implements SortingAlgorithm {
       quickSort(array, partitionIndex+1, end);
     }
   }
+
   private int partition(TrackedArray array, int start, int end) {
     int pivot = array.get(end);
-
-    int i = start-1;
+    int i = start;
 
     for (int j=start; j<end; j++) {
       array.logComparedIndexes(j, end); // only needed to log comparison
       if (array.get(j) <= pivot) {
-        i++;
         array.swap(i, j);
+        i++;
       }
     }
-    array.swap(i+1, end);
+    array.swap(i, end);
 
-    return (i+1);
+    return i;
   }
 }
