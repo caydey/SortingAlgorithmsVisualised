@@ -39,7 +39,7 @@ public class ArrayPanel extends JPanel {
   }
 
   public void setSorted() {
-    renderer.sortedAnimation();
+    renderer.startSortedAnimation();
   }
 
   public void setTrackedArray(TrackedArray trackedArray) {

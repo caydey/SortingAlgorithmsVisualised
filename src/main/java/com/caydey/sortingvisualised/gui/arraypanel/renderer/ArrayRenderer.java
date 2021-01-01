@@ -1,6 +1,7 @@
 package com.caydey.sortingvisualised.gui.arraypanel.renderer;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import java.awt.image.*;
 
@@ -10,9 +11,11 @@ import com.caydey.sortingvisualised.gui.arraypanel.ArrayOperationListener;
 public abstract class ArrayRenderer extends JPanel implements ArrayOperationListener {
   protected TrackedArray trackedArray;
   protected int arrayLength;
-  protected boolean isArraySorted;
-
   protected int panelSize;
+
+  // for the sorted animation (turning array elements green) (-1 array not sorted) (0:array.length elements to highlight)
+  protected int sortedAnimationIndex;
+  private Timer sortedAnimationTimer;
 
   // Colors
   protected static final Color COLOR_BACKGROUND = Color.BLACK;
@@ -96,12 +99,13 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     this.trackedArray = trackedArray;
     this.arrayLength = trackedArray.length;
 
-    isArraySorted = false;
-
-    trackedArray.setOperationListener(this); // so trackedarray can comunicate to this what is being compared with what etc
+    trackedArray.setOperationListener(this); // so trackedarray can comunicate to this what is being compared with what, etc
 
     // set last operations to null (-1)
     resetLastOperations();
+
+    // reset animation from any previously sorted arrays
+    resetSortedAnimation();
 
     // Initialize Graphics - create square image, arrayLength x arrayLength
     initializeGraphics();
@@ -109,9 +113,35 @@ public abstract class ArrayRenderer extends JPanel implements ArrayOperationList
     repaint();
   }
 
-  public void sortedAnimation() {
+  public void startSortedAnimation() {
+    // reset highlighted elements
     resetLastOperations();
-    isArraySorted = true;
+
+    // animation
+    // "delay" before adding "jump" to "sortedAnimationIndex"
+    int delay = (512/arrayLength)+1;
+    int jump = (int)Math.pow((arrayLength/512), 3)+1;
+
+    ActionListener al = new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        sortedAnimationIndex+=jump;
+        repaint();
+        if (sortedAnimationIndex > arrayLength) {
+          sortedAnimationTimer.stop();
+        }
+      }
+    };
+    sortedAnimationTimer = new Timer(delay, al);
+    sortedAnimationTimer.start();
+  }
+
+  private void resetSortedAnimation() {
+    sortedAnimationIndex = -1;
+    // stop Timer object
+    if (sortedAnimationTimer != null) {
+      sortedAnimationTimer.stop();
+    }
+    repaint();
   }
 
   public void setShowSwaps(boolean showSwaps) {

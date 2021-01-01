@@ -39,16 +39,20 @@ public class ColorWheelRenderer extends ArrayRenderer {
           imgGraphics.setColor(getRainbowColor(array[i]));
         }
 
+        // sorted animation (flash elements white)
+        if (0 < sortedAnimationIndex && sortedAnimationIndex < arrayLength/4) {
+          imgGraphics.setColor(Color.WHITE);
+        }
+
         // draw array element
         Arc2D arc = new Arc2D.Double(0, 0, imgSize, imgSize, i*angleUnit, angleUnit, Arc2D.PIE);
         imgGraphics.fill(arc);
       }
+
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
       // display operations count
       updateDisplayedOperations(g2d);
     }
   }
-
-
 }

@@ -24,9 +24,16 @@ public class SpectrumRenderer extends ArrayRenderer {
         } else {
           imgGraphics.setColor(getRainbowColor(array[i]));
         }
+
+        // sorted animation (flash elements white)
+        if (0 < sortedAnimationIndex && sortedAnimationIndex < arrayLength/4) {
+          imgGraphics.setColor(Color.WHITE);
+        }
+
         // draw array element
         imgGraphics.drawLine(i,0, i,arrayLength);
       }
+
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
       // display operations count

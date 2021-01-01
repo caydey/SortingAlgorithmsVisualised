@@ -27,9 +27,16 @@ public class BubbleRenderer extends ArrayRenderer {
         } else if (i == lastGet) {
           imgGraphics.setColor(COLOR_GET);
         }
+
+        // sorted animation (turn array elements green)
+        if (i <= sortedAnimationIndex) {
+          imgGraphics.setColor(COLOR_SORTED);
+        }
+
         // draw array element
         imgGraphics.drawLine(i,arrayLength-array[i]-1, i,arrayLength-array[i]-1);
       }
+
       // streach image to fit on window
       g2d.drawImage(img, 0,0, panelSize,panelSize, null);
       // display operations count
