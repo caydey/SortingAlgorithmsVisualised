@@ -4,6 +4,11 @@
 
 ![SortingAlgorithmsVisualised](https://user-images.githubusercontent.com/63204672/102017025-2a3f2900-3d5c-11eb-807d-fa27f7845475.png)
 
+## Table of contents
+ - [Themes](#Themes)
+ - [Sorting Algorithms](#Sorting-Algorithms)
+ - [Installation](#Installation)
+
 ## Themes
  - Color Wheel
  - Custom Image
@@ -32,8 +37,10 @@
 - Shell Sort
 - Tim Sort
 
-## Build
-### Maven
+## Installation
+### Download
+[Latest Release](https://github.com/caydey/SortingAlgorithmsVisualised/releases/latest)
+### Build
 ```
 mvn install
 java -jar SortingAlgorithmsVisualised.jar
