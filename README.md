@@ -10,12 +10,14 @@
  - [Installation](#Installation)
 
 ## Themes
+ - Bars
+ - Bubbles
  - Color Wheel
  - Custom Image
  - Rainbow Bars
  - Spectrum
 
-![Themes](https://user-images.githubusercontent.com/63204672/101923791-c3890680-3bc7-11eb-9560-c00c69484d84.png)
+![Themes](https://user-images.githubusercontent.com/63204672/104782095-95c14f80-577b-11eb-8f99-578d8f01e092.png)
 
 ## Sorting Algorithms
 - Bitonic Sort
